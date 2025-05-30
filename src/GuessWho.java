@@ -10,7 +10,7 @@ public class GuessWho {
 
         // Create a custom panel with background image
         JPanel mainPanel = new JPanel() {
-            private Image bg = new ImageIcon("src/GWBG.jpg").getImage();
+            private Image bg = new ImageIcon("src/GWBG1.jpg").getImage();
             private Image balloonLeft = new ImageIcon("src/GWBalloons.png").getImage();
             private Image balloonRight = new ImageIcon("src/GWBalloons.png").getImage();
 
@@ -21,8 +21,8 @@ public class GuessWho {
                 g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
                 
                 // Draw balloon images
-                g.drawImage(balloonLeft, 10, getHeight() / 2 - balloonLeft.getHeight(null) / 2, this); // Left balloon
-                g.drawImage(balloonRight, getWidth() - balloonRight.getWidth(null) - 10, getHeight() / 2 - balloonRight.getHeight(null) / 2, this); // Right balloon
+                g.drawImage(balloonLeft, -100, getHeight() / 2 - balloonLeft.getHeight(null) / 2, this); // Left balloon
+                g.drawImage(balloonRight, getWidth() - balloonRight.getWidth(null) + 100, getHeight() / 2 - balloonRight.getHeight(null) / 2, this); // Right balloon
             }
         };
 
@@ -32,6 +32,9 @@ public class GuessWho {
         ImageIcon imageIcon = new ImageIcon("src/GuessWhoWord.png");
         JLabel imageLabel = new JLabel(imageIcon);
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+        ImageIcon imageIconChar1 = new ImageIcon("src/")
 
         // Create the START button
         JButton startButton = new JButton("START");
