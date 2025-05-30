@@ -1,6 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * @author Terrence Yang
+ * 2025-05-30
+ */
 public class GuessWho {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Guess Who");
