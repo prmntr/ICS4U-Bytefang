@@ -9,21 +9,21 @@ import java.util.*;
 
 public abstract class Players {
 
-	
-	private String playerName;
-	
-	// both computerPlayer and humanPlayer will have their own board object 
-	private Board board;
-	
-	private List<String> questionList;
+    private String playerName;
 
-	// constructor for class, that will accept a name for the human player and a board for each
-	public Players(String playerName, Board board) {
-		this.playerName = playerName;
-		this.board = board;
-		this.questionList = new ArrayList<>();
-		
-		questionList.add("Is your character a male?");
+    // both computerPlayer and humanPlayer will have their own board object
+    private Board board;
+
+    private ArrayList<String> questionList;
+
+    // constructor for class, that will accept a name for the human player and a
+    // board for each
+    public Players(String playerName, Board board, ArrayList<String> questionList) {
+        this.playerName = playerName;
+        this.board = board;
+        this.questionList = new ArrayList<String>();
+
+        questionList.add("Is your character a male?");
         questionList.add("Is your character wearing glasses?");
         questionList.add("Does your character have a moustache?");
         questionList.add("Is your character wearing bunny ears?");
