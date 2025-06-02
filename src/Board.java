@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 f
 /**
- * @Author Sherlok Chan
- *         2025-05-29
+ * @author Sherlok Chan
+ * 2025-05-29
  */
 public class Board {
     private Character selectedCharacter;
     private ArrayList<Character> characterList;
 
     /**
-     * 
+     * Constructor
      * @param selectedCharacter
      */
     public Board(Character selectedCharacter) {
-        characterList = new ArrayList<>();
+        characterList = new ArrayList<Character>();
         initializeBoard();
         this.selectedCharacter = selectedCharacter;
     }
@@ -43,4 +43,8 @@ public class Board {
     public ArrayList<Character> getCharacterList() {
         return characterList;
     }
+
+
+
+    
 }
