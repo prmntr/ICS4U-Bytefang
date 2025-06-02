@@ -46,6 +46,10 @@ public abstract class Players {
 	public Board getBoard() {
 		return board;
 	}
+
+    public ArrayList<String> getQuestionList() {
+        return questionList;
+    }
 	
 	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
 	public abstract String askQuestion();
