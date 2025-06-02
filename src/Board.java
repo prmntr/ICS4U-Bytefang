@@ -36,7 +36,7 @@ public class Board {
         CharacterList.add(Zoe);
         
     }
-    /**
+    /*
     boolean isMale,
 	boolean wearingGlasses,
 	boolean hasMoustache,
@@ -50,7 +50,9 @@ public class Board {
 	boolean wearingEarrings,
 	boolean wearingTie,
 	boolean wearingNecklace,
-	boolean mouthOpen) 
+	boolean mouthOpen
+
+    still working on creating characters dont change anything
      */
 
     /**
