@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-f
 /**
  * @author Sherlok Chan
  * 2025-05-29
@@ -19,7 +18,7 @@ public class Board {
     }
 
     private void initializeBoard() {
-
+        // what is initalize 
     }
 
     /**
