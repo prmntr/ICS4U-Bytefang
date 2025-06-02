@@ -1,6 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * @author Terrence Yang
+ * 2025-05-30
+ */
 public class GuessWho {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Guess Who");
@@ -34,7 +37,7 @@ public class GuessWho {
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        ImageIcon imageIconChar1 = new ImageIcon("src/")
+        ImageIcon imageIconChar1 = new ImageIcon("src/");
 
         // Create the START button
         JButton startButton = new JButton("START");
