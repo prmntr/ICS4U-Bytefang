@@ -76,4 +76,8 @@ public class Board {
     public ArrayList<Character> getCharacterList() {
         return characterList;
     }
+
+
+
+    
 }
