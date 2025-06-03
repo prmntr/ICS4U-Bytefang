@@ -48,12 +48,55 @@ public class GuessWho {
         JButton startButton = new JButton("START");
         startButton.setFont(new Font("Arial", Font.BOLD, 32));
         startButton.setPreferredSize(new Dimension(160, 80));
+        startButton.addActionListener(evt -> {
+            frame.dispose(); // Close the current window
+            JFrame newFrame = new JFrame("Guess Who - Game");
+            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            newFrame.setSize(1400, 900); // Open a new, bigger window
+            newFrame.setLocationRelativeTo(null);
+            // Navy blue background panel
+            JPanel gamePanel = new JPanel();
+            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
+            gamePanel.setLayout(new BorderLayout());
+            JLabel label = new JLabel("Game Screen (add your content here)", SwingConstants.CENTER);
+            label.setFont(new Font("Arial", Font.BOLD, 36));
+            label.setForeground(Color.WHITE);
+            gamePanel.add(label, BorderLayout.CENTER);
+            newFrame.setContentPane(gamePanel);
+            newFrame.setVisible(true);
+        });
+
+        // Create the RULES button
+        JButton rulesButton = new JButton("RULES");
+        rulesButton.setFont(new Font("Arial", Font.BOLD, 32));
+        rulesButton.setPreferredSize(new Dimension(160, 80));
+        rulesButton.addActionListener(e -> {
+            JFrame rulesFrame = new JFrame("Rules");
+            rulesFrame.setSize(500, 400);
+            rulesFrame.setLocationRelativeTo(frame);
+            JTextArea rulesText = new JTextArea(
+                "Guess Who Rules:\n\n" +
+                "1. Each player selects a character.\n" +
+                "2. Take turns asking yes/no questions to eliminate characters.\n" +
+                "3. First to guess the opponent's character wins!\n\n" +
+                "(Add more rules as needed.)"
+            );
+            rulesText.setEditable(false);
+            rulesText.setLineWrap(true);
+            rulesText.setWrapStyleWord(true);
+            rulesText.setFont(new Font("Arial", Font.PLAIN, 18));
+            rulesFrame.add(new JScrollPane(rulesText));
+            rulesFrame.setVisible(true);
+        });
 
         // Transparent wrapper panel for layout control
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
-        buttonPanel.setMaximumSize(new Dimension(200, 100));
+        buttonPanel.setMaximumSize(new Dimension(400, 100));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.add(startButton);
+        buttonPanel.add(Box.createHorizontalStrut(50)); // Space between buttons
+        buttonPanel.add(rulesButton);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
