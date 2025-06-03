@@ -20,20 +20,20 @@ public class Board {
 
     
     private void initializeBoard() {
-        Character Chantal = new Character(false, true, false, false, false, false, false, true, false, false, true, false, true, true)
-        CharacterList.add(Chantal);
-        Character Eric = new Character(true, false, true, true, true, false, false, false, false, false, false, false, false, false)
-        CharacterList.add(Eric);
-        Character Alex = new Character(true, false, false, false, false, true, false, false, false, false, false, true, false, true)
-        CharacterList.add(Alex);
-        Character Bob = new Character(true, false, true, true, false, true, false, false, false, false, true, false, false, false)
-        CharacterList.add(Bob);
-        Character Paul = new Character(true, false, true, false, true, false, false, false, true, false, false, false, false, false)
-        CharacterList.add(Paul);
-        Character Frank = new Character(true, false, true, false, false, false, true, false, false, true, true, false, false, true)
-        CharacterList.add(Frank);
-        Character Zoe = new Character(true, false, true, false, false, false, true, false, false, true, true, false, false, true)
-        CharacterList.add(Zoe);
+        Character Chantal = new Character("Chantal", false, true, false, false, false, false, false, true, false, false, true, false, true, true);
+        characterList.add(Chantal);
+        Character Eric = new Character("Eric", true, false, true, true, true, false, false, false, false,false, false, false, false, false);
+        characterList.add(Eric);
+        Character Alex = new Character("Alex", true, false, false, false, false, true, false, false, false, false, false, true, false, true);
+        characterList.add(Alex);
+        Character Bob = new Character("Bob", true, false, true, true, false, true, false, false, false, false, true, false, false, false);
+        characterList.add(Bob);
+        Character Paul = new Character("Paul", true, false, true, false, true, false, false, false, true, false, false, false, false, false);
+        characterList.add(Paul);
+        Character Frank = new Character("Frank", true, false, true, false, false, false, true, false, false, true, true, false, false, true);
+        characterList.add(Frank);
+        Character Zoe = new Character("Zoe", true, false, true, false, false, false, true, false, false, true, true, false, false, true);
+        characterList.add(Zoe);
         
     }
     /*
