@@ -14,7 +14,7 @@ public class GuessWho {
 
         // Create a custom panel with background image
         JPanel mainPanel = new JPanel() {
-            private final Image bg = new ImageIcon("src/GWBG1.jpg").getImage();
+            private final Image bg = new ImageIcon("src/GWBG.png").getImage();
             private final Image balloonLeft = new ImageIcon("src/GWBalloons.png").getImage();
             private final Image balloonRight = new ImageIcon("src/GWBalloons.png").getImage();
 

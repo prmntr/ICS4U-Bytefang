@@ -16,8 +16,8 @@ public abstract class Players {
 
     private ArrayList<String> questionList;
 
-    // constructor for class, that will accept a name for the human player and a
-    // board for each
+    /* constructor for class, that will accept a name for the humman player and a
+    board for each */
     public Players(String playerName, Board board, ArrayList<String> questionList) {
         this.playerName = playerName;
         this.board = board;
@@ -48,9 +48,10 @@ public abstract class Players {
 	}
 	
 	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-	public abstract String askQuestion();
-	
-	public abstract boolean makeGuess();
+    // They do not accept any arguments because each will analyze their own board and determine the best question or guess to make
+	public abstract String askQuestion(String question);
+    
+	public abstract boolean makeGuess(String guessedName);
 
 
 
