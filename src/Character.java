@@ -3,6 +3,7 @@
  * 2025-05-29
  */
 public class Character {
+<<<<<<< HEAD
 		// attributes
 		private boolean isMale;
 		private boolean wearingGlasses;
@@ -18,11 +19,30 @@ public class Character {
 		private boolean wearingTie;
 		private boolean wearingNecklace;
 		private boolean mouthOpen;
+=======
+	// attributes
+	private String characterName;
+	private boolean isMale;
+	private boolean wearingGlasses;
+	private boolean hasMoustache;
+	private boolean wearingBunnyEars;
+	private boolean isBald;
+	private boolean hasBlondHair;
+	private boolean hasBlackHair;
+	private boolean hasBrownHair;
+	private boolean wearingBandana;
+	private boolean wearingHairBand;
+	private boolean wearingEarrings;
+	private boolean wearingTie;
+	private boolean wearingNecklace;
+	private boolean mouthOpen;
+>>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
 
 
 	/**
 	 * This constructor will initialize all the attributes that a Character object contain
      * 
+	 * @param characterName
 	 * @param isMale
 	 * @param wearingGlasses
 	 * @param hasMoustache
@@ -39,6 +59,7 @@ public class Character {
 	 * @param mouthOpen
 	 */
 	public Character(
+			String characterName,
 			boolean isMale,
 			boolean wearingGlasses,
 			boolean hasMoustache,
@@ -54,6 +75,7 @@ public class Character {
 			boolean wearingNecklace,
 			boolean mouthOpen) 
 	{
+		this.characterName = characterName;
 		this.isMale = isMale;
 		this.wearingGlasses = wearingGlasses;
 		this.hasMoustache = hasMoustache;
@@ -128,6 +150,9 @@ public class Character {
 
 
 	/* getter methods */
+	public String getname(){
+		return characterName;
+	}
 	public boolean isMale() {
 		return isMale;
 	}

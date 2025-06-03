@@ -14,14 +14,14 @@ public abstract class Players {
     // both computerPlayer and humanPlayer will have their own board object
     private Board board;
 
-    private ArrayList<String> questionList;
+    private List<String> questionList;
 
     // constructor for class, that will accept a name for the human player and a
     // board for each
-    public Players(String playerName, Board board, ArrayList<String> questionList) {
+    public Players(String playerName, Board board, List<String> questionList) {
         this.playerName = playerName;
         this.board = board;
-        this.questionList = new ArrayList<String>();
+        this.questionList = new ArrayList<>();
 
         questionList.add("Is your character a male?");
         questionList.add("Is your character wearing glasses?");
@@ -47,7 +47,7 @@ public abstract class Players {
 		return board;
 	}
 
-    public ArrayList<String> getQuestionList() {
+    public List<String> getQuestionList() {
         return questionList;
     }
 	
