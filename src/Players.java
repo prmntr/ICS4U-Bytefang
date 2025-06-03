@@ -18,6 +18,7 @@ public abstract class Players {
 
     /* constructor for class, that will accept a name for the humman player and a
     board for each */
+    // question list has been initialized within the constructor as opposed to being constant for use by the AI for character elimination
     public Players(String playerName, Board board, ArrayList<String> questionList) {
         this.playerName = playerName;
         this.board = board;
@@ -48,7 +49,9 @@ public abstract class Players {
 	}
 	
 	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-    // They do not accept any arguments because each will analyze their own board and determine the best question or guess to make
+    
+    // for example: in the human player object, this method will be called by the human through the gui, which will then accept the question asked through the parameter and recieve a response from the AI
+    // the ai can also ask a question to the user and get a response
 	public abstract String askQuestion(String question);
     
 	public abstract boolean makeGuess(String guessedName);
