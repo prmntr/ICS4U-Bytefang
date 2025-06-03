@@ -32,9 +32,9 @@ public class HumanPlayer extends Players{
      * 
      */
     public String askQuestion(String question) {
-      //  getBoard().removeCharacter(question);
+        getBoard().removeCharacter(question);
 
-      //  getQuestionList().removeQuestion(question);
+        getQuestionList().removeQuestion(question);
 
         return question;
 

@@ -3,21 +3,21 @@
  * 2025-05-29
  */
 public class Character {
-	// attributes
-	private boolean isMale;
-	private boolean wearingGlasses;
-	private boolean hasMoustache;
-	private boolean wearingBunnyEars;
-	private boolean isBald;
-	private boolean hasBlondHair;
-	private boolean hasBlackHair;
-	private boolean hasBrownHair;
-	private boolean wearingBandana;
-	private boolean wearingHairBand;
-	private boolean wearingEarrings;
-	private boolean wearingTie;
-	private boolean wearingNecklace;
-	private boolean mouthOpen;
+		// attributes
+		private boolean isMale;
+		private boolean wearingGlasses;
+		private boolean hasMoustache;
+		private boolean wearingBunnyEars;
+		private boolean isBald;
+		private boolean hasBlondHair;
+		private boolean hasBlackHair;
+		private boolean hasBrownHair;
+		private boolean wearingBandana;
+		private boolean wearingHairBand;
+		private boolean wearingEarrings;
+		private boolean wearingTie;
+		private boolean wearingNecklace;
+		private boolean mouthOpen;
 
 
 	/**
