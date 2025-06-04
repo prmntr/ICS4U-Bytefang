@@ -3,8 +3,8 @@
  * 2025-05-29
  */
 public class Character {
-<<<<<<< HEAD
 		// attributes
+		private String characterName;
 		private boolean isMale;
 		private boolean wearingGlasses;
 		private boolean hasMoustache;
@@ -13,30 +13,13 @@ public class Character {
 		private boolean hasBlondHair;
 		private boolean hasBlackHair;
 		private boolean hasBrownHair;
+		private boolean hasBeard;
 		private boolean wearingBandana;
 		private boolean wearingHairBand;
 		private boolean wearingEarrings;
 		private boolean wearingTie;
 		private boolean wearingNecklace;
 		private boolean mouthOpen;
-=======
-	// attributes
-	private String characterName;
-	private boolean isMale;
-	private boolean wearingGlasses;
-	private boolean hasMoustache;
-	private boolean wearingBunnyEars;
-	private boolean isBald;
-	private boolean hasBlondHair;
-	private boolean hasBlackHair;
-	private boolean hasBrownHair;
-	private boolean wearingBandana;
-	private boolean wearingHairBand;
-	private boolean wearingEarrings;
-	private boolean wearingTie;
-	private boolean wearingNecklace;
-	private boolean mouthOpen;
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
 
 
 	/**
@@ -51,6 +34,7 @@ public class Character {
 	 * @param hasBlondHair
 	 * @param hasBlackHair
 	 * @param hasBrownHair
+	 * @param hasBeard
 	 * @param wearingBandana
 	 * @param wearingHairBand
 	 * @param wearingEarrings
@@ -68,6 +52,7 @@ public class Character {
 			boolean hasBlondHair,
 			boolean hasBlackHair,
 			boolean hasBrownHair,
+			boolean hasBeard,
 			boolean wearingBandana,
 			boolean wearingHairBand,
 			boolean wearingEarrings,
@@ -84,6 +69,7 @@ public class Character {
 		this.hasBlondHair = hasBlondHair;
 		this.hasBlackHair = hasBlackHair;
 		this.hasBrownHair = hasBrownHair;
+		this.hasBeard = hasBeard;
 		this.wearingBandana = wearingBandana;
 		this.wearingHairBand = wearingHairBand;
 		this.wearingEarrings = wearingEarrings;
@@ -124,6 +110,9 @@ public class Character {
 		else if (question.equals("Does you character have brown hair?")) {
 			return hasBrownHair;
 		}
+		else if (question.equals("Does you character have a beard?")) {
+			return hasBeard;
+		}
 		else if (question.equals("Is your character wearing a bandana?")) {
 			return wearingBandana;
 		}
@@ -150,7 +139,7 @@ public class Character {
 
 
 	/* getter methods */
-	public String getname(){
+	public String getName(){
 		return characterName;
 	}
 	public boolean isMale() {
@@ -183,6 +172,10 @@ public class Character {
 
 	public boolean hasBrownHair() {
 		return hasBrownHair;
+	}
+
+	public boolean hasBeard(){
+		return hasBeard;
 	}
 
 	public boolean isWearingBandana() {

@@ -1,10 +1,8 @@
 
 import java.util.*;
 /**
- * @author Navin Vallipuram (Team ByteFang)
- * date: 2025.05.26
- * Player class contains the abstract methods that computerPlayer and humanPlayer will inherit from and implement. This
- * class serves as the blueprint for its child classes
+ * @author Brian Xue 
+ * 2025-06-23
  */
 
 public abstract class Players {
@@ -14,7 +12,7 @@ public abstract class Players {
     // both computerPlayer and humanPlayer will have their own board object
     private Board board;
 
-    private List<String> questionList;
+    private ArrayList<String> questionList;
 
     // constructor for class, that will accept a name for the human player and a
     // board for each
@@ -31,6 +29,7 @@ public abstract class Players {
         questionList.add("Does you character have blond hair?");
         questionList.add("Does you character have black hair?");
         questionList.add("Does you character have brown hair?");
+        questionList.add("Does your character have a beard?");
         questionList.add("Is your character wearing a bandana?");
         questionList.add("Is your character wearing a band in the hair?");
         questionList.add("Is your character wearing earrings?");
@@ -47,12 +46,16 @@ public abstract class Players {
 		return board;
 	}
 
-    public List<String> getQuestionList() {
+    public ArrayList<String> getQuestionList() {
         return questionList;
+    }
+
+    public void removeQuestion(String question) {
+        questionList.remove(question);
     }
 	
 	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-	public abstract String askQuestion();
+	public abstract String askQuestion(String question);
 	
 	public abstract boolean makeGuess();
 
