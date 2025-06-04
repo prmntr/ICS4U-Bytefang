@@ -1,10 +1,8 @@
 
 import java.util.*;
 /**
- * @author Navin Vallipuram (Team ByteFang)
- * date: 2025.05.26
- * Player class contains the abstract methods that computerPlayer and humanPlayer will inherit from and implement. This
- * class serves as the blueprint for its child classes
+ * @author Brian Xue 
+ * 2025-06-23
  */
 
 public abstract class Players {
@@ -16,13 +14,12 @@ public abstract class Players {
 
     private ArrayList<String> questionList;
 
-    /* constructor for class, that will accept a name for the humman player and a
-    board for each */
-    // question list has been initialized within the constructor as opposed to being constant for use by the AI for character elimination
-    public Players(String playerName, Board board, ArrayList<String> questionList) {
+    // constructor for class, that will accept a name for the human player and a
+    // board for each
+    public Players(String playerName, Board board, List<String> questionList) {
         this.playerName = playerName;
         this.board = board;
-        this.questionList = new ArrayList<String>();
+        this.questionList = new ArrayList<>();
 
         questionList.add("Is your character a male?");
         questionList.add("Is your character wearing glasses?");
@@ -32,6 +29,7 @@ public abstract class Players {
         questionList.add("Does you character have blond hair?");
         questionList.add("Does you character have black hair?");
         questionList.add("Does you character have brown hair?");
+        questionList.add("Does your character have a beard?");
         questionList.add("Is your character wearing a bandana?");
         questionList.add("Is your character wearing a band in the hair?");
         questionList.add("Is your character wearing earrings?");
@@ -47,14 +45,19 @@ public abstract class Players {
 	public Board getBoard() {
 		return board;
 	}
+
+    public ArrayList<String> getQuestionList() {
+        return questionList;
+    }
+
+    public void removeQuestion(String question) {
+        questionList.remove(question);
+    }
 	
 	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-    
-    // for example: in the human player object, this method will be called by the human through the gui, which will then accept the question asked through the parameter and recieve a response from the AI
-    // the ai can also ask a question to the user and get a response
 	public abstract String askQuestion(String question);
-    
-	public abstract boolean makeGuess(String guessedName);
+	
+	public abstract boolean makeGuess();
 
 
 
