@@ -3,40 +3,22 @@
  * 2025-05-29
  */
 public class Character {
-<<<<<<< HEAD
 		// attributes
-		private boolean isMale;
-		private boolean wearingGlasses;
-		private boolean hasMoustache;
-		private boolean wearingBunnyEars;
-		private boolean isBald;
-		private boolean hasBlondHair;
-		private boolean hasBlackHair;
-		private boolean hasBrownHair;
-		private boolean wearingBandana;
-		private boolean wearingHairBand;
-		private boolean wearingEarrings;
-		private boolean wearingTie;
-		private boolean wearingNecklace;
-		private boolean mouthOpen;
-=======
-	// attributes
-	private String characterName;
-	private boolean isMale;
-	private boolean wearingGlasses;
-	private boolean hasMoustache;
-	private boolean wearingBunnyEars;
-	private boolean isBald;
-	private boolean hasBlondHair;
-	private boolean hasBlackHair;
-	private boolean hasBrownHair;
-	private boolean wearingBandana;
-	private boolean wearingHairBand;
-	private boolean wearingEarrings;
-	private boolean wearingTie;
-	private boolean wearingNecklace;
-	private boolean mouthOpen;
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
+		protected String characterName;
+		protected boolean isMale;
+		protected boolean wearingGlasses;
+		protected boolean hasMoustache;
+		protected boolean wearingBunnyEars;
+		protected boolean isBald;
+		protected boolean hasBlondHair;
+		protected boolean hasBlackHair;
+		protected boolean hasBrownHair;
+		protected boolean wearingBandana;
+		protected boolean wearingHairBand;
+		protected boolean wearingEarrings;
+		protected boolean wearingTie;
+		protected boolean wearingNecklace;
+		protected boolean mouthOpen;
 
 
 	/**

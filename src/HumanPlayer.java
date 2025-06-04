@@ -14,7 +14,7 @@ public class HumanPlayer extends Players {
 
     // method will be called from the gameGUI
     @Override
-    public boolean makeGuess(String guessedName) {
+    public boolean makeGuess() {
         return true;
     }
 
@@ -23,21 +23,16 @@ public class HumanPlayer extends Players {
      * @param question - question taken from GuessWho.java that will be asked to ComputerPlayer
      * 
      */
-<<<<<<< HEAD
     public String askQuestion(String question) {
         getBoard().removeCharacter(question);
 
-        getQuestionList().removeQuestion(question);
+        //getQuestionList().removeQuestion(question);
 
         return question;
 
 
 
         
-=======
-    public String askQuestion() {
-        return "hello";
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
     }
 
 }
