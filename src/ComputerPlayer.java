@@ -7,10 +7,13 @@ import java.util.*;
 
 public class ComputerPlayer extends Players {
 
+    Random rand = new Random();
+
    
 
-    public ComputerPlayer(String playerName, Board board)  {
-        super(playerName, board);
+    public ComputerPlayer(String playerName)  {
+        super(playerName);
+        selectAICharacter();
     }
 
     @ Override
@@ -18,13 +21,17 @@ public class ComputerPlayer extends Players {
         // once there is one charecter left on the board, than the computer is ready to make a guess 
         // The computer will only guess when it knows for certain what charecter is the HumanPlayers charecter
         return (getBoard().getCharacterList().size() == 1);
-    }
 
     @ Override
     // quesiton is returned in computerDecisionMaking, so there is no need for the askQuestion() method for ComputerPlayer
     public String askQuestion() {
         return null; 
 
+    }
+
+    private void selectAICharacter(){
+        Character aiChar = getBoard().getCharacterList().get(rand.nextInt(24)); 
+        getBoard().setSelectedCharacter(aiChar);
     }
 
     /**
@@ -92,7 +99,7 @@ public class ComputerPlayer extends Players {
 
     }
 
-    Random rand = new Random();
+    
 
     if (rand.nextInt(5) < 3) { // 0, 1 and 2 = safest
         return safestQuestion;
