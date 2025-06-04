@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.*;
 /**
  * @name: Navin Vallipuram (Team ByteFang)
@@ -28,71 +27,15 @@ public class ComputerPlayer extends Players {
 
     }
 
-=======
-import java.util.ArrayList;
-import java.util.random.*;
-
-public class ComputerPlayer extends Players {
-
-    /**
-     * @author Brian Xue
-     * 2025-06-23
-     */
-
-    // computerplayer does not need player or board fields it iss inherriter
-    // however it does need to chppse a character
-    private Character aiChar;
-
-    private Board aiBoard;
-
-    public ComputerPlayer() {
-        super(
-                "Computer",
-                new Board(selectAICharacter()), // create a board and pass in the ai character selected
-                new ArrayList<String>() // questionList will be initialized in players contruct
-        );
-        this.aiBoard = getBoard();
-        this.aiChar = aiBoard.getSelectedCharacter();
-    }
-
-    // PLACEHOLDER TO BE CHANGED BY NAVIN
-    private static Character selectAICharacter() {
-        int randomIndex = (int) (Math.random() * 24); // gen random number // Assumes this static method exists
-        Board tempBoard = new Board();
-        return tempBoard.getCharacterList().get(randomIndex);
-
-    }
-
-    @Override
-    public String askQuestion(String question) {
-        return "Computer is making a guess...";
-    }
-
-    @Override
-    public boolean makeGuess() {
-        // Implement AI logic for asking a question if needed
-        return true;
-    }
-
-
-    // made my navin
->>>>>>> 01c373ef38f400b1cc90a77d9f6be227505a52be
     /**
      * 
      * @param remainingCharacters
-     * @return question - Question that computer will decide to ask after narrowing
-     *         it down using its decision making
-     *         Method will give logic to the computer's decision making when
-     *         choosing a question.
-     *         The computer will determine what the safest question is (Question
-     *         that is closest to 50% elimination, 50% remaining) and what the
-     *         riskest is
-     *         (Question that may eliminate one charecter and keep the rest or vice
-     *         versa)
-     *         The computer has a 60% of going with the safest question and a 40% of
-     *         going with the risker question
+     * @return question - Question that computer will decide to ask after narrowing it down using its decision making
+     * Method will give logic to the computer's decision making when choosing a question. 
+     * The computer will determine what the safest question is (Question that is closest to 50% elimination, 50% remaining) and what the riskest is 
+     * (Question that may eliminate one charecter and keep the rest or vice versa)
+     * The computer has a 60% of going with the safest question and a 40% of going with the risker question
      */
-<<<<<<< HEAD
     public String computerDecisionMaking() {
         
         // Use the getter from Players.java to get the list of question that the computer can choose to ask from
@@ -104,37 +47,22 @@ public class ComputerPlayer extends Players {
             // no question in list 
             return "There are no questions available";
         }
-=======
-    public String computerDecisionMaking(ArrayList<Character> remainingCharacters) {
->>>>>>> 01c373ef38f400b1cc90a77d9f6be227505a52be
 
-        // Use the getter from Players.java to get the list of question that the
-        // computer can choose to ask from
-        ArrayList<String> questionList = getQuestionList();
+         int total = remainingCharacters.size();
 
-<<<<<<< HEAD
          // assume that the safest question and the most riskiest question are the first question in the charecter list (for now)
          String safestQuestion = questionList.get(0);
          String riskiestQuestion = questionList.get(0);
-=======
-        int total = remainingCharacters.size();
->>>>>>> 01c373ef38f400b1cc90a77d9f6be227505a52be
 
-        String safestQuestion = "";
-        String riskiestQuestion = "";
-
-        // track the smallest difference between yes and no answers to question (Safest
-        // question)
-        int minDiff = Integer.MAX_VALUE;
-
-        // track the biggest difference between yes and no answers to question to
-        // question (Riskest question)
-        int maxDiff = Integer.MIN_VALUE;
+         // track the smallest difference between yes and no answers to question (Safest question)
+         int minDiff = Integer.MAX_VALUE;
+        
+         // track the biggest difference between yes and no answers to question to question (Riskest question)
+         int maxDiff = Integer.MIN_VALUE;
 
         // outer loop for every question within the questionList
-        for (String question : questionList) {
+        for (String question : questionList){
             int yesCount = 0;
-<<<<<<< HEAD
          // for loop runs for all charecters that are remaining in the remainingCharacters array list
          for (Character c : remainingCharacters) {
               
@@ -142,24 +70,6 @@ public class ComputerPlayer extends Players {
                yesCount++;
             }
          }
-=======
-            int noCount;
-
-            // for loop runs for all charecters that are remaining in the
-            // remainingCharacters array list
-            for (Character c : remainingCharacters) {
-
-                if (question.equals("Is your character a male?") && c.isMale == true) {
-                    yesCount++;
-                }
-
-                else if (question.equals("Is your character wearing glasses?") && c.wearingGlasses == true) {
-                    yesCount++;
-                }
-            }
-        }
-        return "yes";
->>>>>>> 01c373ef38f400b1cc90a77d9f6be227505a52be
 
          int noCount = total - yesCount;
 
@@ -181,7 +91,6 @@ public class ComputerPlayer extends Players {
         }
 
     }
-<<<<<<< HEAD
 
     Random rand = new Random();
 
@@ -198,6 +107,4 @@ public class ComputerPlayer extends Players {
 
 
 }
-=======
->>>>>>> 01c373ef38f400b1cc90a77d9f6be227505a52be
 }
