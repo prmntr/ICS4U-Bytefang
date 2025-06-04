@@ -1,8 +1,9 @@
 
 import java.util.*;
+
 /**
- * @author Brian Xue 
- * 2025-06-23
+ * @author Brian Xue
+ *         2025-06-23
  */
 
 public abstract class Players {
@@ -37,14 +38,14 @@ public abstract class Players {
         questionList.add("Is your character wearing a necklace?");
         questionList.add("Does your chracter have mouth open?");
     }
-	
-	public String getPlayerName() {
-		return playerName;
-	}
-	
-	public Board getBoard() {
-		return board;
-	}
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
 
     public ArrayList<String> getQuestionList() {
         return questionList;
@@ -53,14 +54,11 @@ public abstract class Players {
     public void removeQuestion(String question) {
         questionList.remove(question);
     }
-	
-	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-	public abstract String askQuestion(String question);
-	
-	public abstract boolean makeGuess();
 
+    // askQuestion() and makeGuess() will be inherited by ComputerPlayer and
+    // HumanPlayer to be overridden
+    public abstract String askQuestion(String question);
 
-
-
+    public abstract boolean makeGuess();
 
 }

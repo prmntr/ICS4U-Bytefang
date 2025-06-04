@@ -1,30 +1,30 @@
 /**
  * @author Sherlok Chan
- * 2025-05-29
+ *         2025-05-29
  */
 public class Character {
-		// attributes
-		private String characterName;
-		private boolean isMale;
-		private boolean wearingGlasses;
-		private boolean hasMoustache;
-		private boolean wearingBunnyEars;
-		private boolean isBald;
-		private boolean hasBlondHair;
-		private boolean hasBlackHair;
-		private boolean hasBrownHair;
-		private boolean hasBeard;
-		private boolean wearingBandana;
-		private boolean wearingHairBand;
-		private boolean wearingEarrings;
-		private boolean wearingTie;
-		private boolean wearingNecklace;
-		private boolean mouthOpen;
-
+	// attributes
+	private String characterName;
+	private boolean isMale;
+	private boolean wearingGlasses;
+	private boolean hasMoustache;
+	private boolean wearingBunnyEars;
+	private boolean isBald;
+	private boolean hasBlondHair;
+	private boolean hasBlackHair;
+	private boolean hasBrownHair;
+	private boolean hasBeard;
+	private boolean wearingBandana;
+	private boolean wearingHairBand;
+	private boolean wearingEarrings;
+	private boolean wearingTie;
+	private boolean wearingNecklace;
+	private boolean mouthOpen;
 
 	/**
-	 * This constructor will initialize all the attributes that a Character object contain
-     * 
+	 * This constructor will initialize all the attributes that a Character object
+	 * contain
+	 * 
 	 * @param characterName
 	 * @param isMale
 	 * @param wearingGlasses
@@ -58,8 +58,7 @@ public class Character {
 			boolean wearingEarrings,
 			boolean wearingTie,
 			boolean wearingNecklace,
-			boolean mouthOpen) 
-	{
+			boolean mouthOpen) {
 		this.characterName = characterName;
 		this.isMale = isMale;
 		this.wearingGlasses = wearingGlasses;
@@ -88,60 +87,44 @@ public class Character {
 	public boolean isMatch(String question) {
 		if (question.equals("Is your character a male?")) {
 			return isMale;
-		}
-		else if (question.equals("Is your character wearing glasses?")) {
+		} else if (question.equals("Is your character wearing glasses?")) {
 			return wearingGlasses;
-		}
-		else if (question.equals("Does your character have a moustache?")) {
+		} else if (question.equals("Does your character have a moustache?")) {
 			return hasMoustache;
-		}
-		else if (question.equals("Is your character wearing bunny ears?")) {
+		} else if (question.equals("Is your character wearing bunny ears?")) {
 			return wearingBunnyEars;
-		}
-		else if (question.equals("Is your character bald?")) {
+		} else if (question.equals("Is your character bald?")) {
 			return isBald;
-		}
-		else if (question.equals("Does you character have blond hair?")) {
+		} else if (question.equals("Does you character have blond hair?")) {
 			return hasBlondHair;
-		}
-		else if (question.equals("Does you character have black hair?")) {
+		} else if (question.equals("Does you character have black hair?")) {
 			return hasBlackHair;
-		}
-		else if (question.equals("Does you character have brown hair?")) {
+		} else if (question.equals("Does you character have brown hair?")) {
 			return hasBrownHair;
-		}
-		else if (question.equals("Does you character have a beard?")) {
+		} else if (question.equals("Does you character have a beard?")) {
 			return hasBeard;
-		}
-		else if (question.equals("Is your character wearing a bandana?")) {
+		} else if (question.equals("Is your character wearing a bandana?")) {
 			return wearingBandana;
-		}
-		else if (question.equals("Is your character wearing a band in the hair?")) {
+		} else if (question.equals("Is your character wearing a band in the hair?")) {
 			return wearingHairBand;
-		}
-		else if (question.equals("Is your character wearing earrings?")) {
+		} else if (question.equals("Is your character wearing earrings?")) {
 			return wearingEarrings;
-		}
-		else if (question.equals("Is your character wearing a tie?")) {
+		} else if (question.equals("Is your character wearing a tie?")) {
 			return wearingTie;
-		}
-		else if (question.equals("Is your character wearing a necklace?")) {
+		} else if (question.equals("Is your character wearing a necklace?")) {
 			return wearingNecklace;
-		}
-		else if (question.equals("Does your chracter have mouth open?")) {
+		} else if (question.equals("Does your chracter have mouth open?")) {
 			return mouthOpen;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 
-
-
 	/* getter methods */
-	public String getName(){
+	public String getName() {
 		return characterName;
 	}
+
 	public boolean isMale() {
 		return isMale;
 	}
@@ -174,7 +157,7 @@ public class Character {
 		return hasBrownHair;
 	}
 
-	public boolean hasBeard(){
+	public boolean hasBeard() {
 		return hasBeard;
 	}
 
