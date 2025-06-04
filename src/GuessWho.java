@@ -48,23 +48,134 @@ public class GuessWho {
         JButton startButton = new JButton("START");
         startButton.setFont(new Font("Arial", Font.BOLD, 32));
         startButton.setPreferredSize(new Dimension(160, 80));
-        startButton.addActionListener(evt -> {
-            frame.dispose(); // Close the current window
-            JFrame newFrame = new JFrame("Guess Who - Game");
-            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setSize(1400, 900); // Open a new, bigger window
-            newFrame.setLocationRelativeTo(null);
-            // Navy blue background panel
-            JPanel gamePanel = new JPanel();
-            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
-            gamePanel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("Game Screen (add your content here)", SwingConstants.CENTER);
-            label.setFont(new Font("Arial", Font.BOLD, 36));
-            label.setForeground(Color.WHITE);
-            gamePanel.add(label, BorderLayout.CENTER);
-            newFrame.setContentPane(gamePanel);
-            newFrame.setVisible(true);
-        });
+      startButton.addActionListener(evt -> {
+    frame.dispose();
+
+    JFrame newFrame = new JFrame("Guess Who - Game");
+    newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    newFrame.setSize(1400, 900);
+    newFrame.setLocationRelativeTo(null);
+
+    // Game panel with BorderLayout
+    JPanel gamePanel = new JPanel(new BorderLayout());
+    gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
+
+    // ----- CHARACTER GRID -----
+    JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20)); // 4 rows, 6 columns
+    gridPanel.setBackground(new Color(10, 20, 60)); // Same as main background
+    gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30)); // Top, Left, Bottom, Right
+
+    String[] names = {
+        "CHANTAL", "ERIC", "ALEX", "BOB", "PAUL", "FRANK",
+        "ZOE", "JOE", "BUBA", "RITA", "RICK", "ANTOINE",
+        "JOHN", "CHAP", "EVELYN", "LADY", "SAMANTHA", "JENNY",
+        "JAVIER", "EVAN", "MATHIAS", "MICHAEL", "HANK", "VITO"
+    };
+
+    for (String name : names) {
+        JPanel card = new JPanel(new BorderLayout());
+        card.setPreferredSize(new Dimension(150, 180)); // Larger box
+        card.setBackground(Color.DARK_GRAY);
+        card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+
+        JLabel image = new JLabel();
+        image.setHorizontalAlignment(JLabel.CENTER);
+        image.setIcon(new ImageIcon("src/characters/" + name + ".png")); // Update with correct paths
+
+        JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+
+        card.add(image, BorderLayout.CENTER);
+        card.add(nameLabel, BorderLayout.SOUTH);
+
+        gridPanel.add(card);
+    }
+
+    // Add the grid to the top of the main panel (fills left to right)
+// Wrap the gridPanel in another panel with BorderLayout
+JPanel gridWrapper = new JPanel(new BorderLayout());
+gridWrapper.setBackground(new Color(10, 20, 60));
+gridWrapper.setBorder(BorderFactory.createEmptyBorder(30, 30, 150, 30)); 
+// ↑↑↑ Increase bottom margin (was 10 before, now 60)
+
+// Add gridPanel into center of wrapper
+gridWrapper.add(gridPanel, BorderLayout.CENTER);
+
+// Add the wrapper to the main game panel
+gamePanel.add(gridWrapper, BorderLayout.CENTER);
+
+    // ----- BOTTOM: SCORE + DROPDOWN + ENTER BUTTON + MINI GRID -----
+    // Create question box and enter button first so they are in scope
+    JComboBox<String> questionBox = new JComboBox<>(new String[] {
+        "Does your character wear glasses?",
+        "Is your character bald?",
+        "Does your character have pink hair?",
+        "Is your character male?",
+        "Does your character wear a hat?"
+    });
+    questionBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    questionBox.setPreferredSize(new Dimension(400, 40));
+
+    JButton enterButton = new JButton("Enter");
+    enterButton.setFont(new Font("Arial", Font.BOLD, 18));
+    enterButton.setPreferredSize(new Dimension(100, 40));
+    enterButton.addActionListener(_e -> {
+        String selected = (String) questionBox.getSelectedItem();
+        JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
+    });
+
+    // Mini grid (24 squares)
+    JPanel miniGridPanel = new JPanel(new GridLayout(4, 6, 5, 5));
+    miniGridPanel.setOpaque(false);
+    for (int i = 0; i < 24; i++) {
+        JPanel cell = new JPanel();
+        cell.setPreferredSize(new Dimension(25, 25));
+        cell.setBackground(Color.LIGHT_GRAY);
+        cell.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        miniGridPanel.add(cell);
+    }
+
+    // Custom bottom panel with null layout
+    JPanel bottomPanel = new JPanel(null);
+    bottomPanel.setPreferredSize(new Dimension(1400, 120));
+    bottomPanel.setBackground(new Color(10, 20, 60));
+
+    // Score label (keep at left)
+    JLabel scoreLabel = new JLabel("Score:");
+    scoreLabel.setFont(new Font("Arial", Font.BOLD, 22));
+    scoreLabel.setForeground(Color.WHITE);
+    scoreLabel.setBounds(40, 30, 80, 40);
+    bottomPanel.add(scoreLabel);
+
+    // Dropdown (questionBox) centered horizontally
+    int dropdownWidth = 400;
+    int dropdownHeight = 40;
+    int dropdownX = (1400 - dropdownWidth) / 2;
+    questionBox.setBounds(dropdownX, 30, dropdownWidth, dropdownHeight);
+    bottomPanel.add(questionBox);
+
+    // Enter button next to dropdown (right side)
+    enterButton.setBounds(dropdownX + dropdownWidth + 20, 30, 100, 40);
+    bottomPanel.add(enterButton);
+
+    // Mini grid (24 squares) - bottom right
+    int miniGridWidth = 200;
+    int miniGridHeight = 120;
+    miniGridPanel.setBounds(1400 - miniGridWidth - 40, 0, miniGridWidth, miniGridHeight);
+    bottomPanel.add(miniGridPanel);
+
+    // Add the custom bottomPanel to the SOUTH
+    gamePanel.add(bottomPanel, BorderLayout.SOUTH);
+
+    // Make the big grid in the center vertically bigger
+    gridPanel.setPreferredSize(new Dimension(1200, 520));
+    gridWrapper.setPreferredSize(new Dimension(1200, 540));
+
+    newFrame.setContentPane(gamePanel);
+    newFrame.setVisible(true);
+});
+
 
         // Create the RULES button
         JButton rulesButton = new JButton("RULES");
@@ -125,3 +236,4 @@ public class GuessWho {
 
     }
 }
+//d
