@@ -29,6 +29,7 @@ public abstract class Players {
         questionList.add("Does you character have blond hair?");
         questionList.add("Does you character have black hair?");
         questionList.add("Does you character have brown hair?");
+        questionList.add("Does your character have a beard");
         questionList.add("Is your character wearing a bandana?");
         questionList.add("Is your character wearing a band in the hair?");
         questionList.add("Is your character wearing earrings?");
