@@ -1,51 +1,32 @@
-import java.util.ArrayList;
-<<<<<<< HEAD
+import java.util.*;
 /**
  * @name: Navin Vallipuram (Team ByteFang)
  * @date: 2025/06/01
  * ComputerPlayer
  */
 
-=======
-import java.util.random.*;
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
 public class ComputerPlayer extends Players {
 
-    // computerplayer does not need player or board fields it iss inherriter
-    //however it does need to chppse a character
-    private Character aiChar;
+   
 
-    private Board aiBoard;
-
-    public ComputerPlayer() {
-        super(
-                "Computer",
-                new Board(selectAICharacter()), //create a board and pass in the ai character selected
-                new ArrayList<String>() // questionList will be initialized in players contruct
-        );
-        this.aiBoard = getBoard();
-        this.aiChar = aiBoard.getSelectedCharacter();
+    public ComputerPlayer(String playerName, Board board)  {
+        super(playerName, board);
     }
 
-<<<<<<< HEAD
+    @ Override
     public boolean makeGuess() {
-=======
-    // PLACEHOLDER TO BE CHANGED BY NAVIN
-    private static Character selectAICharacter() {
-        int randomIndex = (int) (Math.random() * 24); // gen random number // Assumes this static method exists
-        Board tempBoard = new Board();
-        return tempBoard.getCharacterList().get(randomIndex);
-       
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
+        // once there is one charecter left on the board, than the computer is ready to make a guess 
+        // The computer will only guess when it knows for certain what charecter is the HumanPlayers charecter
+        return (getBoard().getCharacterList().size() == 1);
     }
 
-    @Override
-    public String askQuestion(String question) {
-        // Implement AI logic for asking a question if needed
-        return "Computer is making a guess...";
+    @ Override
+    // quesiton is returned in computerDecisionMaking, so there is no need for the askQuestion() method for ComputerPlayer
+    public String askQuestion() {
+        return null; 
+
     }
 
-<<<<<<< HEAD
     /**
      * 
      * @param remainingCharacters
@@ -55,15 +36,23 @@ public class ComputerPlayer extends Players {
      * (Question that may eliminate one charecter and keep the rest or vice versa)
      * The computer has a 60% of going with the safest question and a 40% of going with the risker question
      */
-    public String computerDecisionMaking(ArrayList<Character> remainingCharacters){
+    public String computerDecisionMaking() {
         
         // Use the getter from Players.java to get the list of question that the computer can choose to ask from
-        ArrayList<String> questionList = getQuestionList(); 
+        List<String> questionList = getQuestionList(); 
+
+        List<Character> remainingCharacters = getBoard().getCharacterList();
+
+        if (questionList == null || questionList.isEmpty()){
+            // no question in list 
+            return "There are no questions available";
+        }
 
          int total = remainingCharacters.size();
 
-         String safestQuestion = "";
-         String riskiestQuestion = "";
+         // assume that the safest question and the most riskiest question are the first question in the charecter list (for now)
+         String safestQuestion = questionList.get(0);
+         String riskiestQuestion = questionList.get(0);
 
          // track the smallest difference between yes and no answers to question (Safest question)
          int minDiff = Integer.MAX_VALUE;
@@ -74,30 +63,48 @@ public class ComputerPlayer extends Players {
         // outer loop for every question within the questionList
         for (String question : questionList){
             int yesCount = 0;
-            int noCount;
-        
          // for loop runs for all charecters that are remaining in the remainingCharacters array list
-         for (Charecter c : remainingCharacters) {
+         for (Character c : remainingCharacters) {
               
-            if (question.equals("Is your character a male?") && c.isMale==true) {
-                 yesCount++;
-              }
-
-              else if (question.equals("Is your character wearing glasses?" && c.isWearingGlasses == true)) {
-                yesCount++;
-              }
+            if (c.isMatch(question) == true) {
+               yesCount++;
+            }
          }
 
+         int noCount = total - yesCount;
+
+         // absolute value of yesCount - noCount
+         int difference = Math.abs(yesCount - noCount);
+
+        // situation in which current question's yes/no is closer to 50/50 than other questions
+        // update the safest question + its difference value
+        if (difference < minDiff) {
+            minDiff = difference;
+            safestQuestion = question;
+        }
+
+        // sutation in which the current questions's yes/no split is more unbalanced (riskest question)
+        // update the riskiest question + its difference values
+        if (difference > maxDiff) {
+            maxDiff = difference;
+            riskiestQuestion = question;
+        }
+
     }
 
-}
-}s
-=======
-    @Override
-    public boolean makeGuess(String guessedName) {
-        // Implement AI logic for making a guess
-        // For now, just compare guessedName to aiChar's name
-        return aiChar != null && aiChar.getName().equalsIgnoreCase(guessedName);
+    Random rand = new Random();
+
+    if (rand.nextInt(5) < 3) { // 0, 1 and 2 = safest
+        return safestQuestion;
+    } 
+    else{ // otherwise pick riskest question
+        return riskiestQuestion;
     }
+    
+    
+    
+
+
+
 }
->>>>>>> 7a83aab53f50e8de6e7022d0648cb1787a4df108
+}
