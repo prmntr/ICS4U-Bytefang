@@ -10,13 +10,15 @@ public class GuessWho {
         JFrame frame = new JFrame("Guess Who");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null); // Center the frame
 
         // Create a custom panel with background image
         JPanel mainPanel = new JPanel() {
-            private final Image bg = new ImageIcon("src/GWBG.png").getImage();
-            private final Image balloonLeft = new ImageIcon("src/GWBalloons.png").getImage();
-            private final Image balloonRight = new ImageIcon("src/GWBalloons.png").getImage();
+                        private final Image bg = new ImageIcon("src/blue-mountain.jpg").getImage();
+            // If your image is actually a PNG, use "src/blue-mountain.png" instead.
+            //private final Image balloonLeft = new ImageIcon("src/GWBalloons.png").getImage();
+            //private final Image balloonRight = new ImageIcon("src/GWBalloons.png").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -25,8 +27,8 @@ public class GuessWho {
                 g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 
                 // Draw balloon images
-                g.drawImage(balloonLeft, -100, getHeight() / 2 - balloonLeft.getHeight(null) / 2, this); // Left balloon
-                g.drawImage(balloonRight, getWidth() - balloonRight.getWidth(null) + 100, getHeight() / 2 - balloonRight.getHeight(null) / 2, this); // Right balloon
+                //g.drawImage(balloonLeft, -100, getHeight() / 2 - balloonLeft.getHeight(null) / 2, this); // Left balloon
+                //g.drawImage(balloonRight, getWidth() - balloonRight.getWidth(null) + 100, getHeight() / 2 - balloonRight.getHeight(null) / 2, this); // Right balloon
             }
         };
 
