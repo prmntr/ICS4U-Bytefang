@@ -60,6 +60,29 @@ public class GuessWho {
             newFrame.setSize(1200, 800);
             newFrame.setLocationRelativeTo(null);
 
+<<<<<<< HEAD
+        // Create the START button
+        JButton startButton = new JButton("START");
+        startButton.setFont(new Font("Arial", Font.BOLD, 32));
+        startButton.setPreferredSize(new Dimension(160, 80));
+        startButton.addActionListener(evt -> {
+            frame.dispose(); // Close the current window
+            JFrame newFrame = new JFrame("Guess Who - Game");
+            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            newFrame.setSize(1400, 900); // Open a new, bigger window
+            newFrame.setLocationRelativeTo(null);
+            // Navy blue background panel
+            JPanel gamePanel = new JPanel();
+            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
+            gamePanel.setLayout(new BorderLayout());
+            JLabel label = new JLabel("Game Screen (add your content here)", SwingConstants.CENTER);
+            label.setFont(new Font("Arial", Font.BOLD, 36));
+            label.setForeground(Color.WHITE);
+            gamePanel.add(label, BorderLayout.CENTER);
+=======
+            // Game panel with BorderLayout
+            JPanel gamePanel = new JPanel(new BorderLayout());
+            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
             // Same as start screen
             JPanel gamePanel = new JPanel(new BorderLayout()) {
                 private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.jpg").getImage();
@@ -285,4 +308,7 @@ public class GuessWho {
 
     }
 }
+<<<<<<< HEAD
+=======
 // d
+>>>>>>> 9c514df6929044e8b9308053d257073e0fd5de7a
