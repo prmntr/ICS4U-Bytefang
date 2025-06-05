@@ -9,11 +9,12 @@ public class ComputerPlayer extends Players {
 
     Random rand = new Random();
 
+    
    
 
     public ComputerPlayer(String playerName)  {
         super(playerName);
-        selectAICharacter();
+     
     }
 
     @ Override
@@ -22,16 +23,13 @@ public class ComputerPlayer extends Players {
         // The computer will only guess when it knows for certain what charecter is the HumanPlayers charecter
         return (getBoard().getCharacterList().size() == 1);
 
-    @ Override
-    // quesiton is returned in computerDecisionMaking, so there is no need for the askQuestion() method for ComputerPlayer
-    public String askQuestion() {
-        return null; 
 
+   
     }
 
-    private void selectAICharacter(){
+
+    public void selectAiCharecter() {
         Character aiChar = getBoard().getCharacterList().get(rand.nextInt(24)); 
-        getBoard().setSelectedCharacter(aiChar);
     }
 
     /**

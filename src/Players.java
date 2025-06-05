@@ -1,7 +1,7 @@
 
 import java.util.*;
 /**
- * @author Brian Xue 
+ * @author Navin Vallipuram + Brian Xue 
  * 2025-06-23
  */
 
@@ -16,10 +16,10 @@ public abstract class Players {
 
     // constructor for class, that will accept a name for the human player and a
     // board for each
-    public Players(String playerName, Board board, List<String> questionList) {
+    public Players(String playerName) {
         this.playerName = playerName;
-        this.board = board;
-        this.questionList = new ArrayList<>();
+        board = new Board(null);
+        questionList = new ArrayList<>();
 
         questionList.add("Is your character a male?");
         questionList.add("Is your character wearing glasses?");
@@ -54,8 +54,7 @@ public abstract class Players {
         questionList.remove(question);
     }
 	
-	// askQuestion() and makeGuess() will be inherited by ComputerPlayer and HumanPlayer to be overridden
-	public abstract String askQuestion(String question);
+
 	
 	public abstract boolean makeGuess();
 
