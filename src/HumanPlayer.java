@@ -12,22 +12,12 @@ public class HumanPlayer extends Players{
 	
     @Override
     /**
-     * @param - String guessedName - name of the charecter that the user would like to guess as ComputerCharecters
+     * @param - 2 Characters: c1 is the Character human asked, c2 is computer's secret character
      * @return - boolean (true/false if name that human guessed and computers character match)
      * Method will evaluate and return wether the charecter that the user guesses matches with the charecter 
      */
-	public boolean makeGuess(Character guessedChar, Character aiChar) {
-		return guessedChar.equals(aiChar);
-		
+	public boolean makeGuess(Character c1, Character c2) {
+		return c1.equals(c2);
 	}
 
-    
-    /**
-     * @param question - question taken from GuessWho.java that will be asked to ComputerPlayer
-     * 
-     */
-    public void askQuestion(String question) {
-        getBoard().removeCharacter(question);
-        getQuestionList().remove(question);
-    }
 }
