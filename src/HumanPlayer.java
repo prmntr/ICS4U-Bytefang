@@ -1,4 +1,3 @@
-import java.util.*;
 /**
  * @author: Navin Vallipuram (Team ByteFang)
  * date: 2025.05.26
@@ -7,8 +6,8 @@ import java.util.*;
 
 public class HumanPlayer extends Players{
 
-	public HumanPlayer(String playerNamet) {
-		 super(playerNamet);
+	public HumanPlayer(String playerName) {
+		 super(playerName);
 	}
 	
     @Override
@@ -27,16 +26,8 @@ public class HumanPlayer extends Players{
      * @param question - question taken from GuessWho.java that will be asked to ComputerPlayer
      * 
      */
-    public String askQuestion(String question) {
+    public void askQuestion(String question) {
         getBoard().removeCharacter(question);
-
         getQuestionList().remove(question);
-
-        return question;
-
-
-
-        
     }
-
 }

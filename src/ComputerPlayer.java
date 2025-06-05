@@ -29,7 +29,7 @@ public class ComputerPlayer extends Players {
 
 
     public void selectAiCharecter() {
-        Character aiChar = getBoard().getCharacterList().get(rand.nextInt(24)); 
+        getBoard().setSelectedCharacter(getBoard().getCharacterList().get(rand.nextInt(24)));
     }
 
     /**
@@ -105,11 +105,6 @@ public class ComputerPlayer extends Players {
     else{ // otherwise pick riskest question
         return riskiestQuestion;
     }
-    
-    
-    
-
-
 
 }
 }

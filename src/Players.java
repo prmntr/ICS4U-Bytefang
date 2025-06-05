@@ -54,12 +54,6 @@ public abstract class Players {
         questionList.remove(question);
     }
 	
-
-	
-	public abstract boolean makeGuess();
-
-
-
-
+	public abstract boolean makeGuess(Character c1, Character c2);
 
 }
