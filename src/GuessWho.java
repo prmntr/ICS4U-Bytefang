@@ -52,6 +52,7 @@ public class GuessWho {
         startButton.setMaximumSize(new Dimension(400, 50)); // Allow stretching
         // Real logic
         startButton.addActionListener(evt -> {
+            // removes start screen
             frame.dispose();
 
             JFrame newFrame = new JFrame("Guess Who - Game");
@@ -59,14 +60,23 @@ public class GuessWho {
             newFrame.setSize(1200, 800);
             newFrame.setLocationRelativeTo(null);
 
-            // Game panel with BorderLayout
-            JPanel gamePanel = new JPanel(new BorderLayout());
-            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
+            // Same as start screen
+            JPanel gamePanel = new JPanel(new BorderLayout()) {
+                private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.jpg").getImage();
+
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    if (bg != null) {
+                        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+                    }
+                }
+            };
 
             // ----- CHARACTER GRID -----
             JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20)); // 4 rows, 6 columns
-            gridPanel.setBackground(new Color(10, 20, 60)); // Same as main background
-            gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30)); // Top, Left, Bottom, Right
+            // After creating gridPanel
+            gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100)); // top, left, bottom, right
 
             String[] names = {
                     "CHANTAL", "ERIC", "ALEX", "BOB", "PAUL", "FRANK",
@@ -75,15 +85,17 @@ public class GuessWho {
                     "JAVIER", "EVAN", "MATHIAS", "MICHAEL", "HANK", "VITO"
             };
 
+            
             for (String name : names) {
                 JPanel card = new JPanel(new BorderLayout());
-                card.setPreferredSize(new Dimension(150, 180)); // Larger box
+                card.setMaximumSize(new Dimension(120, 140)); // Larger box
                 card.setBackground(Color.DARK_GRAY);
                 card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
 
                 JLabel image = new JLabel();
                 image.setHorizontalAlignment(JLabel.CENTER);
-                image.setIcon(new ImageIcon("src/media/characters/" + name + ".png")); // Update with correct paths
+                Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH); // creates an imageicon the turns it into an image then scales it then sets that to an icon
+                image.setIcon(new ImageIcon(scaledImg));
 
                 JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
                 nameLabel.setForeground(Color.WHITE);
@@ -98,8 +110,6 @@ public class GuessWho {
             // Add the grid to the top of the main panel (fills left to right)
             // Wrap the gridPanel in another panel with BorderLayout
             JPanel gridWrapper = new JPanel(new BorderLayout());
-            gridWrapper.setBackground(new Color(10, 20, 60));
-            gridWrapper.setBorder(BorderFactory.createEmptyBorder(30, 30, 150, 30));
             // ↑↑↑ Increase bottom margin (was 10 before, now 60)
 
             // Add gridPanel into center of wrapper
@@ -174,6 +184,11 @@ public class GuessWho {
             // Make the big grid in the center vertically bigger
             gridPanel.setPreferredSize(new Dimension(1200, 520));
             gridWrapper.setPreferredSize(new Dimension(1200, 540));
+
+            // so the background can shine through
+            gridWrapper.setOpaque(false);
+            gridPanel.setOpaque(false);
+            bottomPanel.setOpaque(false);
 
             newFrame.setContentPane(gamePanel);
             newFrame.setVisible(true);
