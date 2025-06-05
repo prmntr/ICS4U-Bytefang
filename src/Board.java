@@ -116,4 +116,8 @@ public class Board {
     public ArrayList<Character> getCharacterList() {
         return characterList;
     }
+    
+     public void setSelectedCharacter(Character selectedCharacter) {
+        this.selectedCharacter = selectedCharacter;
+    }
 }
