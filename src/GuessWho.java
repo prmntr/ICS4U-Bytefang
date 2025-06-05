@@ -18,7 +18,8 @@ public class GuessWho {
         JPanel mainPanel = new JPanel() {
             private final Image bg = new ImageIcon("src/media/blue-mountain.jpg").getImage();
 
-            // chunk of code needed to have the background image stretch with the panel size; swing does not have a background image method
+            // chunk of code needed to have the background image stretch with the panel
+            // size; swing does not have a background image method
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -33,20 +34,22 @@ public class GuessWho {
 
         // Load the title image
         ImageIcon imageIcon = new ImageIcon("src/media/GuessWhoLogo.png");
-        Image img = imageIcon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Sets image size; scale_smooth optimized for smoothness
+        Image img = imageIcon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Sets image size;
+                                                                                          // scale_smooth optimized for
+                                                                                          // smoothness
         JLabel imageLabel = new JLabel(new ImageIcon(img));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Create the START button and style it
         JButton startButton = new JButton("Start");
-        startButton.setFont(new Font("Arial", Font.BOLD, 32));
-        startButton.setPreferredSize(new Dimension(180, 50));
+        startButton.setFont(new Font("Arial", Font.BOLD, 38));
         startButton.setFocusPainted(false);
         startButton.setForeground(new Color(230, 230, 230)); // off white
         startButton.setBackground(new Color(6, 26, 62));
         startButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        startButton.setBorderPainted(false); 
+        startButton.setBorderPainted(false);
         startButton.setContentAreaFilled(true);
+        startButton.setMaximumSize(new Dimension(400, 50)); // Allow stretching
         // Real logic
         startButton.addActionListener(evt -> {
             frame.dispose();
@@ -178,8 +181,8 @@ public class GuessWho {
 
         // Create the RULES button
         JButton rulesButton = new JButton("Rules");
-        rulesButton.setFont(new Font("Arial", Font.BOLD, 32));
-        rulesButton.setPreferredSize(new Dimension(180, 50));
+        rulesButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        rulesButton.setMaximumSize(new Dimension(195, 50));
         rulesButton.setFocusPainted(false);
         rulesButton.setForeground(new Color(230, 230, 230)); // off white
         rulesButton.setBackground(new Color(6, 26, 62));
@@ -204,14 +207,42 @@ public class GuessWho {
             rulesFrame.setVisible(true);
         });
 
-        // Transparent wrapper panel for layout control
+        JButton settingsButton = new JButton("Settings");
+        settingsButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        settingsButton.setMaximumSize(new Dimension(195, 50));
+        settingsButton.setFocusPainted(false);
+        settingsButton.setForeground(new Color(230, 230, 230)); // off white
+        settingsButton.setBackground(new Color(6, 26, 62));
+        settingsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        settingsButton.setBorderPainted(false);
+        settingsButton.setContentAreaFilled(true);
+        rulesButton.addActionListener(e -> {
+            // stuff here
+        });
+
+        JLabel versionText = new JLabel("created by ByteFang");
+        versionText.setFont(new Font("Arial", Font.PLAIN, 13));
+        versionText.setForeground(new Color(230, 230, 230));
+
+        JPanel lowerButtonPanel = new JPanel();
+        lowerButtonPanel.setOpaque(false);
+        lowerButtonPanel.setLayout(new BoxLayout(lowerButtonPanel, BoxLayout.X_AXIS));
+        lowerButtonPanel.add(rulesButton);
+        lowerButtonPanel.add(Box.createHorizontalStrut(10));
+        lowerButtonPanel.add(settingsButton);
+        lowerButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Main button panel with vertical layout: Start on top, then rules/settings,
+        // 10px vertical spacing
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
-        buttonPanel.setMaximumSize(new Dimension(400, 100));
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setMaximumSize(new Dimension(15000, 400));
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lowerButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(startButton);
-        buttonPanel.add(Box.createHorizontalStrut(50)); // Space between buttons
-        buttonPanel.add(rulesButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(lowerButtonPanel);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -231,7 +262,8 @@ public class GuessWho {
         mainPanel.add(imageLabel); // Guess Who title
         mainPanel.add(Box.createVerticalStrut(60)); // Space before button
         mainPanel.add(buttonPanel);
-        mainPanel.add(Box.createVerticalGlue()); // Pushes everything upwards if there's space
+        mainPanel.add(Box.createVerticalGlue()); // Boilerplate to push everything up
+        mainPanel.add(versionText);
 
         frame.add(mainPanel);
         frame.setVisible(true);
