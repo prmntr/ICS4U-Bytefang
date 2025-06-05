@@ -18,8 +18,6 @@ public class GuessWho {
         JPanel mainPanel = new JPanel() {
             private final Image bg = new ImageIcon("src/media/blue-mountain.jpg").getImage();
 
-            // chunk of code needed to have the background image stretch with the panel
-            // size; swing does not have a background image method
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -29,14 +27,11 @@ public class GuessWho {
             }
         };
 
-        // sets the layout to be a box layout
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         // Load the title image
         ImageIcon imageIcon = new ImageIcon("src/media/GuessWhoLogo.png");
-        Image img = imageIcon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Sets image size;
-                                                                                          // scale_smooth optimized for
-                                                                                          // smoothness
+        Image img = imageIcon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH);
         JLabel imageLabel = new JLabel(new ImageIcon(img));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -50,40 +45,16 @@ public class GuessWho {
         startButton.setBorderPainted(false);
         startButton.setContentAreaFilled(true);
         startButton.setMaximumSize(new Dimension(400, 50)); // Allow stretching
-        // Real logic
+
+        // Real logic for Start button
         startButton.addActionListener(evt -> {
-            // removes start screen
             frame.dispose();
 
             JFrame newFrame = new JFrame("Guess Who - Game");
             newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setSize(1200, 800);
+            newFrame.setSize(1400, 900);
             newFrame.setLocationRelativeTo(null);
 
-<<<<<<< HEAD
-        // Create the START button
-        JButton startButton = new JButton("START");
-        startButton.setFont(new Font("Arial", Font.BOLD, 32));
-        startButton.setPreferredSize(new Dimension(160, 80));
-        startButton.addActionListener(evt -> {
-            frame.dispose(); // Close the current window
-            JFrame newFrame = new JFrame("Guess Who - Game");
-            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setSize(1400, 900); // Open a new, bigger window
-            newFrame.setLocationRelativeTo(null);
-            // Navy blue background panel
-            JPanel gamePanel = new JPanel();
-            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
-            gamePanel.setLayout(new BorderLayout());
-            JLabel label = new JLabel("Game Screen (add your content here)", SwingConstants.CENTER);
-            label.setFont(new Font("Arial", Font.BOLD, 36));
-            label.setForeground(Color.WHITE);
-            gamePanel.add(label, BorderLayout.CENTER);
-=======
-            // Game panel with BorderLayout
-            JPanel gamePanel = new JPanel(new BorderLayout());
-            gamePanel.setBackground(new Color(10, 20, 60)); // Navy blue
-            // Same as start screen
             JPanel gamePanel = new JPanel(new BorderLayout()) {
                 private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.jpg").getImage();
 
@@ -97,9 +68,8 @@ public class GuessWho {
             };
 
             // ----- CHARACTER GRID -----
-            JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20)); // 4 rows, 6 columns
-            // After creating gridPanel
-            gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100)); // top, left, bottom, right
+            JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20));
+            gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
 
             String[] names = {
                     "CHANTAL", "ERIC", "ALEX", "BOB", "PAUL", "FRANK",
@@ -108,16 +78,15 @@ public class GuessWho {
                     "JAVIER", "EVAN", "MATHIAS", "MICHAEL", "HANK", "VITO"
             };
 
-            
             for (String name : names) {
                 JPanel card = new JPanel(new BorderLayout());
-                card.setMaximumSize(new Dimension(120, 140)); // Larger box
+                card.setMaximumSize(new Dimension(120, 140));
                 card.setBackground(Color.DARK_GRAY);
                 card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
 
                 JLabel image = new JLabel();
                 image.setHorizontalAlignment(JLabel.CENTER);
-                Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH); // creates an imageicon the turns it into an image then scales it then sets that to an icon
+                Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                 image.setIcon(new ImageIcon(scaledImg));
 
                 JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
@@ -130,19 +99,12 @@ public class GuessWho {
                 gridPanel.add(card);
             }
 
-            // Add the grid to the top of the main panel (fills left to right)
-            // Wrap the gridPanel in another panel with BorderLayout
             JPanel gridWrapper = new JPanel(new BorderLayout());
-            // ↑↑↑ Increase bottom margin (was 10 before, now 60)
-
-            // Add gridPanel into center of wrapper
             gridWrapper.add(gridPanel, BorderLayout.CENTER);
 
-            // Add the wrapper to the main game panel
             gamePanel.add(gridWrapper, BorderLayout.CENTER);
 
             // ----- BOTTOM: SCORE + DROPDOWN + ENTER BUTTON + MINI GRID -----
-            // Create question box and enter button first so they are in scope
             JComboBox<String> questionBox = new JComboBox<>(new String[] {
                     "Does your character wear glasses?",
                     "Is your character bald?",
@@ -161,7 +123,6 @@ public class GuessWho {
                 JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
             });
 
-            // Mini grid (24 squares)
             JPanel miniGridPanel = new JPanel(new GridLayout(4, 6, 5, 5));
             miniGridPanel.setOpaque(false);
             for (int i = 0; i < 24; i++) {
@@ -172,43 +133,35 @@ public class GuessWho {
                 miniGridPanel.add(cell);
             }
 
-            // Custom bottom panel with null layout
             JPanel bottomPanel = new JPanel(null);
             bottomPanel.setPreferredSize(new Dimension(1400, 120));
             bottomPanel.setBackground(new Color(10, 20, 60));
 
-            // Score label (keep at left)
             JLabel scoreLabel = new JLabel("Score:");
             scoreLabel.setFont(new Font("Arial", Font.BOLD, 22));
             scoreLabel.setForeground(Color.WHITE);
             scoreLabel.setBounds(40, 30, 80, 40);
             bottomPanel.add(scoreLabel);
 
-            // Dropdown (questionBox) centered horizontally
             int dropdownWidth = 400;
             int dropdownHeight = 40;
             int dropdownX = (1400 - dropdownWidth) / 2;
             questionBox.setBounds(dropdownX, 30, dropdownWidth, dropdownHeight);
             bottomPanel.add(questionBox);
 
-            // Enter button next to dropdown (right side)
             enterButton.setBounds(dropdownX + dropdownWidth + 20, 30, 100, 40);
             bottomPanel.add(enterButton);
 
-            // Mini grid (24 squares) - bottom right
             int miniGridWidth = 200;
             int miniGridHeight = 120;
             miniGridPanel.setBounds(1400 - miniGridWidth - 40, 0, miniGridWidth, miniGridHeight);
             bottomPanel.add(miniGridPanel);
 
-            // Add the custom bottomPanel to the SOUTH
             gamePanel.add(bottomPanel, BorderLayout.SOUTH);
 
-            // Make the big grid in the center vertically bigger
             gridPanel.setPreferredSize(new Dimension(1200, 520));
             gridWrapper.setPreferredSize(new Dimension(1200, 540));
 
-            // so the background can shine through
             gridWrapper.setOpaque(false);
             gridPanel.setOpaque(false);
             bottomPanel.setOpaque(false);
@@ -222,7 +175,7 @@ public class GuessWho {
         rulesButton.setFont(new Font("Arial", Font.PLAIN, 25));
         rulesButton.setMaximumSize(new Dimension(195, 50));
         rulesButton.setFocusPainted(false);
-        rulesButton.setForeground(new Color(230, 230, 230)); // off white
+        rulesButton.setForeground(new Color(230, 230, 230));
         rulesButton.setBackground(new Color(6, 26, 62));
         rulesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         rulesButton.setBorderPainted(false);
@@ -249,12 +202,12 @@ public class GuessWho {
         settingsButton.setFont(new Font("Arial", Font.PLAIN, 25));
         settingsButton.setMaximumSize(new Dimension(195, 50));
         settingsButton.setFocusPainted(false);
-        settingsButton.setForeground(new Color(230, 230, 230)); // off white
+        settingsButton.setForeground(new Color(230, 230, 230));
         settingsButton.setBackground(new Color(6, 26, 62));
         settingsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         settingsButton.setBorderPainted(false);
         settingsButton.setContentAreaFilled(true);
-        rulesButton.addActionListener(e -> {
+        settingsButton.addActionListener(e -> {
             // stuff here
         });
 
@@ -270,8 +223,6 @@ public class GuessWho {
         lowerButtonPanel.add(settingsButton);
         lowerButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Main button panel with vertical layout: Start on top, then rules/settings,
-        // 10px vertical spacing
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -285,22 +236,21 @@ public class GuessWho {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // Add character images at top (side by side)
         JPanel characterPanel = new JPanel();
-        characterPanel.setOpaque(false); // So background shows through
+        characterPanel.setOpaque(false);
         characterPanel.setLayout(new BoxLayout(characterPanel, BoxLayout.X_AXIS));
         characterPanel.add(Box.createHorizontalGlue());
-        characterPanel.add(Box.createHorizontalStrut(20)); // spacing
+        characterPanel.add(Box.createHorizontalStrut(20));
         characterPanel.add(Box.createHorizontalGlue());
         characterPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        mainPanel.add(Box.createVerticalStrut(20)); // Top margin
-        mainPanel.add(characterPanel); // Character images at the top
-        mainPanel.add(Box.createVerticalStrut(-100)); // Space between images
-        mainPanel.add(imageLabel); // Guess Who title
-        mainPanel.add(Box.createVerticalStrut(60)); // Space before button
+        mainPanel.add(Box.createVerticalStrut(20));
+        mainPanel.add(characterPanel);
+        mainPanel.add(Box.createVerticalStrut(-100));
+        mainPanel.add(imageLabel);
+        mainPanel.add(Box.createVerticalStrut(60));
         mainPanel.add(buttonPanel);
-        mainPanel.add(Box.createVerticalGlue()); // Boilerplate to push everything up
+        mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(versionText);
 
         frame.add(mainPanel);
@@ -308,7 +258,3 @@ public class GuessWho {
 
     }
 }
-<<<<<<< HEAD
-=======
-// d
->>>>>>> 9c514df6929044e8b9308053d257073e0fd5de7a
