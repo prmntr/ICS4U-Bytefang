@@ -213,16 +213,16 @@ public class GuessWhoGame {
                     g.fillRect(0, 0, getWidth(), getHeight());
                     g.setColor(Color.WHITE);
                     g.setFont(new Font("Arial", Font.BOLD, 40));
-                    g.drawString("RULES", 60, 80);
+                    g.drawString("RULES", 60, 50);
                     g.setFont(new Font("Arial", Font.PLAIN, 28));
                     g.drawString("1. Each player selects a character.", 60, 120);
-                    g.drawString("2. Take turns asking yes/no questions.", 60, 160);
-                    g.drawString("3. Eliminate characters based on answers. ", 60, 200);
-                    g.drawString("4. On your turn, instead of asking a question, you ", 60, 240);
-                    g.drawString("may guess the opponent’s character.", 60, 280);
-                    g.drawString("      If correct: You win! ", 60, 320);
-                    g.drawString("      If wrong: You lose the game. ", 60, 360);
-                    g.drawString("5. First to guess the opponent's character wins!", 60, 400);
+                    g.drawString("2. Take turns asking yes/no questions.", 60, 180);
+                    g.drawString("3. Eliminate characters based on answers. ", 60, 240);
+                    g.drawString("4. On your turn, instead of asking a question, you ", 60, 300);
+                    g.drawString("may guess the opponent’s character.", 60, 360);
+                    g.drawString("      If correct: You win! ", 60, 420);
+                    g.drawString("      If wrong: You lose the game. ", 60, 480);
+                    g.drawString("5. First to guess the opponent's character wins!", 60, 540);
                 }
             };
             rulesPanel1.setLayout(null);
@@ -236,11 +236,11 @@ public class GuessWhoGame {
                     g.fillRect(0, 0, getWidth(), getHeight());
                     g.setColor(Color.WHITE);
                     g.setFont(new Font("Arial", Font.BOLD, 40));
-                    g.drawString("Tips and Strategies", 60, 80);
+                    g.drawString("Tips and Strategies", 60, 50);
                     g.setFont(new Font("Arial", Font.PLAIN, 28));
-                    g.drawString("Try to ask questions that split the remaning options in half", 60, 160);
-                    g.drawString("Eliminate as many characters as possible with each question. ", 60, 350);
-                    g.drawString("Think logically—don’t guess too early! ", 60, 540);
+                    g.drawString("Try to ask questions that split the remaning options in half", 60, 120);
+                    g.drawString("Eliminate as many characters as possible with each question. ", 60, 180);
+                    g.drawString("Think logically—don’t guess too early! ", 60, 240);
                 }
             };
             rulesPanel2.setLayout(null);
