@@ -72,6 +72,13 @@ public class GuessWho {
             JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20));
             gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 30, 220));
 
+            String playerName = JOptionPane.showInputDialog(newFrame, "Enter your name:");
+            if (playerName == null || playerName.trim().isEmpty()) {
+                playerName = "Player 1";
+            }
+            Players Human = new HumanPlayer(playerName);
+            Players Computer = new ComputerPlayer("Computer");
+
             String[] names = {
                     "CHANTAL", "ERIC", "ALEX", "BOB", "PAUL", "FRANK",
                     "ZOE", "JOE", "BUBA", "RITA", "RICK", "ANTOINE",
