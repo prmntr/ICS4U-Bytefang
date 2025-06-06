@@ -100,9 +100,9 @@ public class Board {
      * 
      * @param question
      */
-    public void removeCharacter(String question) {
+    public void removeCharacter(String question, boolean hasAttribute) {
         for (int i = 0; i < characterList.size(); i++) {
-            if (!characterList.get(i).isMatch(question)) {
+            if (characterList.get(i).isMatch(question) != hasAttribute) {
                 characterList.remove(i);
             }
         }

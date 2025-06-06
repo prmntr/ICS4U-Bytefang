@@ -50,10 +50,10 @@ public abstract class Players {
         return questionList;
     }
 
-    public void removeQuestion(String question) {
+    public void askQuestion(String question, boolean answerIsYes) {
+        board.removeCharacter(question, answerIsYes);
         questionList.remove(question);
     }
-	
-	public abstract boolean makeGuess(Character c1, Character c2);
 
+    public abstract boolean makeGuess(Character c1, Character c2);
 }

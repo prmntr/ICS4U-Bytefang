@@ -18,17 +18,15 @@ public class ComputerPlayer extends Players {
     }
 
     @ Override
-    public boolean makeGuess() {
-        // once there is one charecter left on the board, than the computer is ready to make a guess 
-        // The computer will only guess when it knows for certain what charecter is the HumanPlayers charecter
-        return (getBoard().getCharacterList().size() == 1);
-
-
-   
+    /**
+     * Methods trigger when Computer's board has 1 character left (handled in GUI)
+     */
+    public boolean makeGuess(Character c1, Character c2) {
+        return c1.equals(c2);
     }
 
 
-    public void selectAiCharecter() {
+    public void setAiCharecter() {
         getBoard().setSelectedCharacter(getBoard().getCharacterList().get(rand.nextInt(24)));
     }
 
