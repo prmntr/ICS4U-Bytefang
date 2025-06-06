@@ -10,18 +10,14 @@ public class ComputerPlayer extends Players {
     Random rand = new Random();
 
     
-   
-
     public ComputerPlayer(String playerName)  {
         super(playerName);
-     
     }
 
-    @ Override
     /**
      * Methods trigger when Computer's board has 1 character left (handled in GUI)
      */
-    public boolean makeGuess(Character c1, Character c2) {
+    public boolean readyToGuess() {
         return getBoard().getCharacterList().size() == 1;
     }
 
