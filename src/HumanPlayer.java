@@ -10,7 +10,7 @@ public class HumanPlayer extends Players{
 		 super(playerName);
 	}
 	
-    @Override
+    
     /**
      * @param - 2 Characters: c1 is the Character human asked, c2 is computer's secret character
      * @return - boolean (true/false if name that human guessed and computers character match)
