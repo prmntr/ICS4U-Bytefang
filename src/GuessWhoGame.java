@@ -1,6 +1,6 @@
 import java.awt.*;
-import javax.swing.*;
 import java.util.*;
+import javax.swing.*;
 
 // brian terrance is a poo poo head who farts every day like a big fat boy
 public class GuessWhoGame {
@@ -197,19 +197,97 @@ public class GuessWhoGame {
         rulesButton.setContentAreaFilled(true);
         rulesButton.addActionListener(e -> {
             JFrame rulesFrame = new JFrame("Rules");
-            rulesFrame.setSize(500, 400);
+            rulesFrame.setSize(900, 600);
             rulesFrame.setLocationRelativeTo(frame);
-            JTextArea rulesText = new JTextArea(
-                    "Guess Who Rules:\n\n" +
-                            "1. Each player selects a character.\n" +
-                            "2. Take turns asking yes/no questions to eliminate characters.\n" +
-                            "3. First to guess the opponent's character wins!\n\n" +
-                            "(Add more rules as needed.)");
-            rulesText.setEditable(false);
-            rulesText.setLineWrap(true);
-            rulesText.setWrapStyleWord(true);
-            rulesText.setFont(new Font("Arial", Font.PLAIN, 18));
-            rulesFrame.add(new JScrollPane(rulesText));
+            rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            CardLayout cardLayout = new CardLayout();
+            JPanel cardPanel = new JPanel(cardLayout);
+
+            // First rules panel
+            JPanel rulesPanel1 = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor(new Color(10, 20, 60)); // Navy blue
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Arial", Font.BOLD, 40));
+                    g.drawString("RULES", 60, 80);
+                    g.setFont(new Font("Arial", Font.PLAIN, 28));
+                    g.drawString("1. Each player selects a character.", 60, 120);
+                    g.drawString("2. Take turns asking yes/no questions.", 60, 160);
+                    g.drawString("3. Eliminate characters based on answers. ", 60, 200);
+                    g.drawString("4. On your turn, instead of asking a question, you ", 60, 240);
+                    g.drawString("may guess the opponent’s character.", 60, 280);
+                    g.drawString("      If correct: You win! ", 60, 320);
+                    g.drawString("      If wrong: You lose the game. ", 60, 360);
+                    g.drawString("5. First to guess the opponent's character wins!", 60, 400);
+                }
+            };
+            rulesPanel1.setLayout(null);
+
+            // Second rules panel
+            JPanel rulesPanel2 = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor(new Color(10, 20, 60));
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                    g.setColor(Color.WHITE);
+                    g.setFont(new Font("Arial", Font.BOLD, 40));
+                    g.drawString("Tips and Strategies", 60, 80);
+                    g.setFont(new Font("Arial", Font.PLAIN, 28));
+                    g.drawString("Try to ask questions that split the remaning options in half", 60, 160);
+                    g.drawString("Eliminate as many characters as possible with each question. ", 60, 350);
+                    g.drawString("Think logically—don’t guess too early! ", 60, 540);
+                }
+            };
+            rulesPanel2.setLayout(null);
+
+            cardPanel.add(rulesPanel1, "panel1");
+            cardPanel.add(rulesPanel2, "panel2");
+
+            // Arrow buttons
+            JButton leftArrow = new JButton("<");
+            leftArrow.setFont(new Font("Arial", Font.BOLD, 36));
+            leftArrow.setBounds(30, 250, 60, 60);
+            leftArrow.setFocusable(false);
+            leftArrow.setVisible(false); // Hide on first panel
+
+            JButton rightArrow = new JButton(">");
+            rightArrow.setFont(new Font("Arial", Font.BOLD, 36));
+            rightArrow.setBounds(800, 250, 60, 60);
+            rightArrow.setFocusable(false);
+
+            JPanel overlayPanel = new JPanel(null);
+            overlayPanel.setOpaque(false);
+            overlayPanel.add(leftArrow);
+            overlayPanel.add(rightArrow);
+            overlayPanel.setBounds(0, 0, 900, 600);
+
+            // Layered pane to overlay arrows on cardPanel
+            JLayeredPane layeredPane = new JLayeredPane();
+            cardPanel.setBounds(0, 0, 900, 600);
+            overlayPanel.setBounds(0, 0, 900, 600);
+            layeredPane.setPreferredSize(new Dimension(900, 600));
+            layeredPane.add(cardPanel, Integer.valueOf(0));
+            layeredPane.add(overlayPanel, Integer.valueOf(1));
+
+            // Arrow button actions
+            rightArrow.addActionListener(_e -> {
+                cardLayout.next(cardPanel);
+                rightArrow.setVisible(false);
+                leftArrow.setVisible(true);
+            });
+            leftArrow.addActionListener(_e -> {
+                cardLayout.previous(cardPanel);
+                leftArrow.setVisible(false);
+                rightArrow.setVisible(true);
+            });
+
+            rulesFrame.setContentPane(layeredPane);
+            rulesFrame.pack();
             rulesFrame.setVisible(true);
         });
 
