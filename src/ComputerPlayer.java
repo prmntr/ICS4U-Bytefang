@@ -22,7 +22,7 @@ public class ComputerPlayer extends Players {
      * Methods trigger when Computer's board has 1 character left (handled in GUI)
      */
     public boolean makeGuess(Character c1, Character c2) {
-        return c1.equals(c2);
+        return getBoard().getCharacterList().size() == 1;
     }
 
 
