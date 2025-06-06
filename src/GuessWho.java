@@ -52,8 +52,9 @@ public class GuessWho {
 
             JFrame newFrame = new JFrame("Guess Who - Game");
             newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setSize(1400, 900);
+            newFrame.setMinimumSize(new Dimension(1400, 780));
             newFrame.setLocationRelativeTo(null);
+            newFrame.setResizable(false);
 
             JPanel gamePanel = new JPanel(new BorderLayout()) {
                 private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.png").getImage();
@@ -87,14 +88,14 @@ public class GuessWho {
 
             for (String name : names) {
                 JPanel card = new JPanel(new BorderLayout());
-                card.setMaximumSize(new Dimension(120, 140));
-                card.setBackground(Color.DARK_GRAY);
-                card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+                card.setMaximumSize(new Dimension(100, 120));
+                card.setBackground(new Color(0, 0, 0, 90));
+                card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 0));
 
                 JLabel image = new JLabel();
                 image.setHorizontalAlignment(JLabel.CENTER);
                 Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage()
-                        .getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                        .getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 image.setIcon(new ImageIcon(scaledImg));
 
                 JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
@@ -131,6 +132,7 @@ public class GuessWho {
                 JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
             });
 
+            // Create the mini grid panel
             JPanel miniGridPanel = new JPanel(new GridLayout(4, 6, 5, 5));
             miniGridPanel.setOpaque(false);
             for (int i = 0; i < 24; i++) {
@@ -140,6 +142,15 @@ public class GuessWho {
                 cell.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 miniGridPanel.add(cell);
             }
+
+            // Add mini grid panel to the right of the main grid
+            JPanel rightPanel = new JPanel(new BorderLayout());
+            rightPanel.setOpaque(false);
+            rightPanel.setPreferredSize(new Dimension(220, 540));
+            rightPanel.add(Box.createVerticalStrut(40), BorderLayout.NORTH);
+            rightPanel.add(miniGridPanel, BorderLayout.CENTER);
+
+            gamePanel.add(rightPanel, BorderLayout.EAST);
 
             JPanel bottomPanel = new JPanel(null);
             bottomPanel.setPreferredSize(new Dimension(1400, 120));
@@ -219,9 +230,10 @@ public class GuessWho {
             // stuff here
         });
 
-        JLabel versionText = new JLabel("created by ByteFang");
-        versionText.setFont(new Font("Arial", Font.PLAIN, 13));
+        JLabel versionText = new JLabel("<html>Created by ByteFang<br>version 12345<br>Terrance sucks</html>");
+        versionText.setFont(new Font("Arial", Font.PLAIN, 16));
         versionText.setForeground(new Color(230, 230, 230));
+        versionText.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 0));
 
         JPanel lowerButtonPanel = new JPanel();
         lowerButtonPanel.setOpaque(false);
@@ -242,24 +254,20 @@ public class GuessWho {
         buttonPanel.add(lowerButtonPanel);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
-        JPanel characterPanel = new JPanel();
-        characterPanel.setOpaque(false);
-        characterPanel.setLayout(new BoxLayout(characterPanel, BoxLayout.X_AXIS));
-        characterPanel.add(Box.createHorizontalGlue());
-        characterPanel.add(Box.createHorizontalStrut(20));
-        characterPanel.add(Box.createHorizontalGlue());
-        characterPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        mainPanel.add(Box.createVerticalStrut(20));
-        mainPanel.add(characterPanel);
-        mainPanel.add(Box.createVerticalStrut(-100));
+        mainPanel.add(Box.createVerticalStrut(170));
         mainPanel.add(imageLabel);
-        mainPanel.add(Box.createVerticalStrut(60));
+
+        mainPanel.add(Box.createVerticalStrut(30));
         mainPanel.add(buttonPanel);
+
         mainPanel.add(Box.createVerticalGlue());
-        mainPanel.add(versionText);
+
+        // Place version text in bottom left corner using BorderLayout
+        JPanel versionPanel = new JPanel(new BorderLayout());
+        versionPanel.setOpaque(false);
+        versionPanel.add(versionText, BorderLayout.WEST);
+        versionPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+        mainPanel.add(versionPanel);
 
         frame.add(mainPanel);
         frame.setVisible(true);
