@@ -56,7 +56,7 @@ public class GuessWho {
             newFrame.setLocationRelativeTo(null);
 
             JPanel gamePanel = new JPanel(new BorderLayout()) {
-                private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.jpg").getImage();
+                private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.png").getImage();
 
                 @Override
                 protected void paintComponent(Graphics g) {
@@ -69,7 +69,7 @@ public class GuessWho {
 
             // ----- CHARACTER GRID -----
             JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20));
-            gridPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
+            gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 30, 220));
 
             String[] names = {
                     "CHANTAL", "ERIC", "ALEX", "BOB", "PAUL", "FRANK",
@@ -86,7 +86,8 @@ public class GuessWho {
 
                 JLabel image = new JLabel();
                 image.setHorizontalAlignment(JLabel.CENTER);
-                Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                Image scaledImg = new ImageIcon("src/media/characters/" + name + ".png").getImage()
+                        .getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                 image.setIcon(new ImageIcon(scaledImg));
 
                 JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
@@ -102,7 +103,7 @@ public class GuessWho {
             JPanel gridWrapper = new JPanel(new BorderLayout());
             gridWrapper.add(gridPanel, BorderLayout.CENTER);
 
-            gamePanel.add(gridWrapper, BorderLayout.CENTER);
+            gamePanel.add(gridWrapper, BorderLayout.WEST);
 
             // ----- BOTTOM: SCORE + DROPDOWN + ENTER BUTTON + MINI GRID -----
             JComboBox<String> questionBox = new JComboBox<>(new String[] {
