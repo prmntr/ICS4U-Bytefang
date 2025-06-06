@@ -1,4 +1,4 @@
-public class GuessWho {
+public class Main {
 // brian
     public static void main(String[] args) {
 
