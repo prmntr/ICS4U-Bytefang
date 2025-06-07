@@ -138,7 +138,7 @@ public class GuessWhoGame {
             questionBox.setBackground(new Color(0, 60, 70)); // slightly deeper blue
             questionBox.setFocusable(false);
             questionBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            questionBox.setPreferredSize(new Dimension(460, 44)); 
+            questionBox.setPreferredSize(new Dimension(460, 44));
             // questionBox.setMaximumRowCount(5); // Limit the number of visible options
 
             // Remove the ugly default arrow background
@@ -207,6 +207,7 @@ public class GuessWhoGame {
             playerLabel.setFont(new Font("Arial", Font.BOLD, 18));
             playerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            playerPanel.add(Box.createVerticalStrut(15));
             playerPanel.add(playerImage);
             playerPanel.add(Box.createVerticalStrut(8));
             playerPanel.add(playerLabel);
@@ -227,13 +228,13 @@ public class GuessWhoGame {
             computerLabel.setFont(new Font("Arial", Font.BOLD, 18));
             computerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            computerPanel.add(Box.createVerticalStrut(15));
             computerPanel.add(computerImage);
             computerPanel.add(Box.createVerticalStrut(8));
             computerPanel.add(computerLabel);
 
             // Add both panels to the main panel with spacing
             botAndHuman.add(playerPanel);
-            botAndHuman.add(Box.createHorizontalStrut(10));
             botAndHuman.add(computerPanel);
             botAndHuman.setAlignmentX(Component.CENTER_ALIGNMENT);
             botAndHuman.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
