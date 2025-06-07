@@ -2,10 +2,12 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-// brian terrance is a poo poo head who farts every day like a big fat boy
+/*
+ * @author brian
+ */
 public class GuessWhoGame {
     public void GuessWho() {
-        // Create a frame and set properties
+        // Create a frame for the intro and set properties
         JFrame frame = new JFrame("Guess Who");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
@@ -15,6 +17,7 @@ public class GuessWhoGame {
         JPanel mainPanel = new JPanel() {
             private final Image bg = new ImageIcon("src/media/blue-mountain.jpg").getImage();
 
+            // don't touch, for background
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -24,6 +27,7 @@ public class GuessWhoGame {
             }
         };
 
+        // sets layout as box layout; everythng defaults stacks on top of each other
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         // Load the title image
@@ -57,128 +61,167 @@ public class GuessWhoGame {
 
             // Background panel
             JPanel gamePanel = new JPanel(new BorderLayout()) {
-            private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.png").getImage();
+                private final Image bg = new ImageIcon("src/media/Monterey-blue-green-dark.png").getImage();
 
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (bg != null) {
-                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+                // don't touch makes background
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    if (bg != null) {
+                        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+                    }
                 }
-            }
             };
 
-            // Character grid
+            // Character grid; 4 rows 6 columns + adds padding
             JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20));
             gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 30, 40));
             gridPanel.setOpaque(false);
 
-            // Mini grid panel
-            JPanel miniGridPanel = new JPanel(new GridLayout(4, 6, 5, 5));
-            miniGridPanel.setOpaque(false);
+            // Mini grid panel; for bot
+            JPanel botGridPanel = new JPanel(new GridLayout(4, 6, 5, 5));
+            botGridPanel.setOpaque(false);
+
+            // display each box
+            // TODO: attach to each bot character
             for (int i = 0; i < 24; i++) {
-            JPanel cell = new JPanel();
-            cell.setPreferredSize(new Dimension(25, 25));
-            cell.setBackground(Color.LIGHT_GRAY);
-            cell.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            miniGridPanel.add(cell);
+                JLabel botCell = new JLabel();
+                Image botCellImage = new ImageIcon("src/media/placeholder.jpg").getImage()
+                        .getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+                botCell.setIcon(new ImageIcon(botCellImage));
+                botGridPanel.add(botCell);
             }
 
             // Question dropdown
+            // TODO: pull from board and steal questions
             JComboBox<String> questionBox = new JComboBox<>(new String[] {
-            "Does your character wear glasses?",
-            "Is your character bald?",
-            "Does your character have pink hair?",
-            "Is your character male?",
-            "Does your character wear a hat?"
+                    "Does your character wear glasses?",
+                    "Is your character bald?",
+                    "Does your character have pink hair?",
+                    "Is your character male?",
+                    "Does your character wear a hat?"
             });
+            // TODO: fix formatting questions
             questionBox.setFont(new Font("Arial", Font.PLAIN, 18));
+            questionBox.setForeground(new Color(230, 230, 230)); // off white
+            questionBox.setBackground(new Color(6, 26, 62));
+            questionBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             questionBox.setPreferredSize(new Dimension(400, 40));
 
-            // Enter button
+            // enter button for questions
+            // TODO: fix formatting button
             JButton enterButton = new JButton("Enter");
             enterButton.setFont(new Font("Arial", Font.BOLD, 18));
             enterButton.setPreferredSize(new Dimension(100, 40));
 
-            // Score label
+            // TODO: figure out a way to count score (steal from real game)
             JLabel scoreLabel = new JLabel("Score:");
             scoreLabel.setFont(new Font("Arial", Font.BOLD, 22));
             scoreLabel.setForeground(Color.WHITE);
 
-            // Get player name and set up players
+            // small logic to get player name and set up players
             String playerName = JOptionPane.showInputDialog(newFrame, "Enter your name:");
-            if (playerName == null || playerName.trim().isEmpty()) {
-            playerName = "Player 1";
+            if (playerName == null) {
+                playerName = "Player 1";
             }
+            System.out.println(playerName); // TODO: remove when done and also fix
+
+            // use the human's player to set up the board
             Players Human = new HumanPlayer(playerName);
             Players Computer = new ComputerPlayer("Computer");
             ArrayList<Character> humanCharacters = Human.getBoard().getCharacterList();
 
-            // Add character cards to grid
+            // Add character cards to grid + styling [from me :) ]
             for (Character character : humanCharacters) {
-            String charName = character.getName();
-            JPanel card = new JPanel(new BorderLayout());
-            card.setMaximumSize(new Dimension(100, 120));
-            card.setBackground(new Color(0, 0, 0, 90));
-            card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 0));
+                String charName = character.getName();
+                JPanel card = new JPanel(new BorderLayout());
+                card.setMaximumSize(new Dimension(100, 120));
+                card.setBackground(new Color(0, 0, 0, 90));
+                card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 0));
 
-            JLabel image = new JLabel();
-            image.setHorizontalAlignment(JLabel.CENTER);
-            Image scaledImg = new ImageIcon("src/media/characters/" + charName + ".png").getImage()
-                .getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            image.setIcon(new ImageIcon(scaledImg));
+                JLabel image = new JLabel();
+                image.setHorizontalAlignment(JLabel.CENTER);
+                Image scaledImg = new ImageIcon("src/media/characters/" + charName + ".png").getImage()
+                        .getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                image.setIcon(new ImageIcon(scaledImg));
 
-            JLabel nameLabel = new JLabel(charName, SwingConstants.CENTER);
-            nameLabel.setForeground(Color.WHITE);
-            nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+                JLabel nameLabel = new JLabel(charName, SwingConstants.CENTER);
+                nameLabel.setForeground(Color.WHITE);
+                nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
-            card.add(image, BorderLayout.CENTER);
-            card.add(nameLabel, BorderLayout.SOUTH);
+                card.add(image, BorderLayout.CENTER);
+                card.add(nameLabel, BorderLayout.SOUTH);
 
-            gridPanel.add(card);
+                gridPanel.add(card);
             }
 
+            // TODO: replace with generic bot vs human image
+            JLabel botAndHuman = new JLabel();
+            botAndHuman.setHorizontalAlignment(JLabel.CENTER);
+            Image botAndHumanImg = new ImageIcon("src/media/placeholder.jpg").getImage()
+                    .getScaledInstance(385, 200, Image.SCALE_SMOOTH);
+            botAndHuman.setIcon(new ImageIcon(botAndHumanImg));
+            botAndHuman.setAlignmentX(Component.CENTER_ALIGNMENT); // This centers it
+            botAndHuman.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+            // TODO: this is where the real logic starts; start a loop blah
             // Enter button logic
             enterButton.addActionListener(_e -> {
-            String selected = (String) questionBox.getSelectedItem();
-            JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
+                String selected = (String) questionBox.getSelectedItem();
+                JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
             });
 
-            // Layout panels (do this at the end)
+
+
+            //* PUTTING EVERYTHING TOGETHER*/
+            
+            // main content Panel for character; everything except for question asker
+            JPanel mainContentPanel = new JPanel();
+            mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.X_AXIS));
+            mainContentPanel.setOpaque(false);
+            mainContentPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 10, 40));
+
+            // left side to hold user characters
             JPanel gridWrapper = new JPanel(new BorderLayout());
             gridWrapper.setOpaque(false);
             gridWrapper.add(gridPanel, BorderLayout.CENTER);
+            mainContentPanel.add(gridWrapper);
+            mainContentPanel.add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
-            JPanel rightPanel = new JPanel(new BorderLayout());
-            rightPanel.setOpaque(false);
-            rightPanel.setPreferredSize(new Dimension(220, 540));
-            rightPanel.add(Box.createVerticalStrut(40), BorderLayout.NORTH);
-            rightPanel.add(miniGridPanel, BorderLayout.CENTER);
+            // right side to hold bot characters generic image and score
+            JPanel rightCompositePanel = new JPanel();
+            rightCompositePanel.setLayout(new BoxLayout(rightCompositePanel, BoxLayout.Y_AXIS));
+            rightCompositePanel.setMaximumSize(new Dimension(500, 500));
+            rightCompositePanel.setOpaque(false);
 
-            JPanel bottomPanel = new JPanel(null);
-            bottomPanel.setPreferredSize(new Dimension(1400, 120));
-            bottomPanel.setBackground(new Color(10, 20, 60));
-            scoreLabel.setBounds(40, 30, 80, 40);
-            bottomPanel.add(scoreLabel);
+            // add bot grid panel, bot and human image, and score label
+            rightCompositePanel.add(botGridPanel);
+            rightCompositePanel.add(botAndHuman);
+            rightCompositePanel.add(scoreLabel);
+            scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // because boxlayout doesn't auto center
+            mainContentPanel.add(rightCompositePanel);
 
+            // question panel at the bottom
+            JPanel questionPanel = new JPanel(null);
+
+            questionPanel.setPreferredSize(new Dimension(1400, 120));
+            questionPanel.setOpaque(false);
+
+
+            // black magic
+            // TODO: make this understandable
             int dropdownWidth = 400;
             int dropdownHeight = 40;
             int dropdownX = (1400 - dropdownWidth) / 2;
             questionBox.setBounds(dropdownX, 30, dropdownWidth, dropdownHeight);
-            bottomPanel.add(questionBox);
-
             enterButton.setBounds(dropdownX + dropdownWidth + 20, 30, 100, 40);
-            bottomPanel.add(enterButton);
+            questionPanel.add(questionBox);
+            questionPanel.add(enterButton);
 
-            int miniGridWidth = 200;
-            int miniGridHeight = 120;
-            miniGridPanel.setBounds(1400 - miniGridWidth - 40, 0, miniGridWidth, miniGridHeight);
-            bottomPanel.add(miniGridPanel);
-
-            // Add everything to the main game panel
-            gamePanel.add(gridWrapper, BorderLayout.CENTER);
-            gamePanel.add(rightPanel, BorderLayout.EAST);
-            gamePanel.add(bottomPanel, BorderLayout.SOUTH);
+            // add all components to the game panel
+            gamePanel.setLayout(new BorderLayout());
+            gamePanel.add(mainContentPanel, BorderLayout.CENTER);
+            gamePanel.add(questionPanel, BorderLayout.SOUTH);
 
             // Show the frame
             newFrame.setContentPane(gamePanel);
@@ -197,6 +240,7 @@ public class GuessWhoGame {
         rulesButton.setContentAreaFilled(true);
         rulesButton.addActionListener(e -> {
             JFrame rulesFrame = new JFrame("Rules");
+            rulesFrame.setResizable(false);
             rulesFrame.setSize(900, 600);
             rulesFrame.setLocationRelativeTo(frame);
             rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -207,6 +251,7 @@ public class GuessWhoGame {
             // First rules panel
             JPanel rulesPanel1 = new JPanel() {
                 @Override
+                //! terrance, why are you creating the entire panel in the paintComponent method?
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.setColor(new Color(10, 20, 60)); // Navy blue
