@@ -9,10 +9,15 @@ public class GuessWhoGame {
     // TODO: change frame icon setIconImage()
     public void GuessWho() {
         // Create a frame for the intro and set properties
-        JFrame frame = new JFrame("Guess Who");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 700);
-        frame.setLocationRelativeTo(null); // Centers the frame within the desktop window
+        JFrame startFrame = new JFrame("Guess Who");
+        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startFrame.setSize(1000, 700);
+        startFrame.setLocationRelativeTo(null); // Centers the frame within the desktop window
+
+        // Sets favicon
+        // https://stackoverflow.com/questions/17815033/how-to-change-java-icon-in-a-jframe
+        ImageIcon icon = new ImageIcon("src/media/GuessWhoIcon.png");
+        startFrame.setIconImage(icon.getImage());
 
         // Create anon subclass for mainPanel
         JPanel mainPanel = new JPanel() {
@@ -51,14 +56,21 @@ public class GuessWhoGame {
         // Real logic for Start button
         startButton.addActionListener(evt -> {
             // Remove the start screen frame
-            frame.dispose();
+            startFrame.dispose();
 
             // Instantiate the new frame and set window params
-            JFrame newFrame = new JFrame("Guess Who - Game");
-            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setMinimumSize(new Dimension(1400, 780));
-            newFrame.setLocationRelativeTo(null);
-            newFrame.setResizable(false);
+            JFrame gameFrame = new JFrame("Guess Who - Game");
+            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // ? acts weird, this is a known bug with swing
+            // https://bugs.openjdk.org/browse/JDK-8221452
+            gameFrame.setSize(new Dimension(1300, 750));
+            gameFrame.setMinimumSize(new Dimension(1300, 750));
+            gameFrame.setLocationRelativeTo(null);
+            gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            gameFrame.setResizable(true);
+
+            // Sets favicon
+            gameFrame.setIconImage(icon.getImage());
 
             // Background panel
             JPanel gamePanel = new JPanel(new BorderLayout()) {
@@ -74,9 +86,27 @@ public class GuessWhoGame {
                 }
             };
 
+            // small logic to get player name and set up players
+            String playerName = JOptionPane.showInputDialog(gameFrame, "Choose a character name:", "Player Name");
+            if (playerName == null) {
+                // User pressed Cancel, close this frame and show the start screen again
+                gameFrame.dispose();
+                // Re-show the start screen
+                GuessWho(); // Call the method to show the start screen again
+                return;
+            }
+            if (playerName.trim().isEmpty()) {
+                playerName = "Player 1";
+            }
+            System.out.println(playerName); // TODO: remove when done and also fix
+
+            // use the human's player to set up the board
+            Players Human = new HumanPlayer(playerName);
+            Players Computer = new ComputerPlayer("Computer");
+
             // Character grid; 4 rows 6 columns + adds padding
             JPanel gridPanel = new JPanel(new GridLayout(4, 6, 20, 20));
-            gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 30, 40));
+            gridPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 30, 40));
             gridPanel.setOpaque(false);
 
             // Mini grid panel; for bot
@@ -94,42 +124,42 @@ public class GuessWhoGame {
             }
 
             // Question dropdown
-            // TODO: pull from board and steal questions
-            JComboBox<String> questionBox = new JComboBox<>(new String[] {
-                    "Does your character wear glasses?",
-                    "Is your character bald?",
-                    "Does your character have pink hair?",
-                    "Is your character male?",
-                    "Does your character wear a hat?"
-            });
-            // TODO: fix formatting questions
-            questionBox.setFont(new Font("Arial", Font.PLAIN, 18));
-            questionBox.setForeground(new Color(230, 230, 230)); // off white
-            questionBox.setBackground(new Color(6, 26, 62));
-            questionBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            questionBox.setPreferredSize(new Dimension(400, 40));
+            ArrayList<String> questions = Human.getQuestionList();
+            JComboBox<String> questionBox = new JComboBox<>(questions.toArray(new String[0]));
 
-            // enter button for questions
-            // TODO: fix formatting button
+            // Question Label
+            JLabel questionLabel = new JLabel("Ask a question:");
+            questionLabel.setFont(new Font("Arial", Font.BOLD, 22));
+            questionLabel.setForeground(Color.WHITE);
+
+            // Style the question dropdown (ComboBox)
+            questionBox.setFont(new Font("Arial", Font.PLAIN, 20));
+            questionBox.setForeground(new Color(230, 230, 230)); // off white
+            questionBox.setBackground(new Color(0, 60, 70)); // slightly deeper blue
+            questionBox.setFocusable(false);
+            questionBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            questionBox.setPreferredSize(new Dimension(460, 44)); 
+            // questionBox.setMaximumRowCount(5); // Limit the number of visible options
+
+            // Remove the ugly default arrow background
+            // https://coderanch.com/t/415909/java/Change-JSpinner-JComboBox-Arrows-Color
+            questionBox.setUI(new javax.swing.plaf.basic.BasicComboBoxUI());
+
+            // Style the enter button
             JButton enterButton = new JButton("Enter");
-            enterButton.setFont(new Font("Arial", Font.BOLD, 18));
-            enterButton.setPreferredSize(new Dimension(100, 40));
+            enterButton.setFont(new Font("Arial", Font.BOLD, 20));
+            enterButton.setPreferredSize(new Dimension(110, 44));
+            enterButton.setForeground(new Color(230, 230, 230));
+            enterButton.setBackground(new Color(1, 169, 110));
+            enterButton.setBorderPainted(false);
+            enterButton.setFocusPainted(false);
+            enterButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             // TODO: figure out a way to count score (steal from real game)
             JLabel scoreLabel = new JLabel("Score:");
             scoreLabel.setFont(new Font("Arial", Font.BOLD, 22));
             scoreLabel.setForeground(Color.WHITE);
 
-            // small logic to get player name and set up players
-            String playerName = JOptionPane.showInputDialog(newFrame, "Enter your name:");
-            if (playerName == null || playerName.trim().isEmpty()) {
-                playerName = "Player 1";
-            }
-            System.out.println(playerName); // TODO: remove when done and also fix
-
-            // use the human's player to set up the board
-            Players Human = new HumanPlayer(playerName);
-            Players Computer = new ComputerPlayer("Computer");
             ArrayList<Character> humanCharacters = Human.getBoard().getCharacterList();
 
             // Add character cards to grid + styling [from me :) ]
@@ -212,13 +242,11 @@ public class GuessWhoGame {
             // Enter button logic
             enterButton.addActionListener(_e -> {
                 String selected = (String) questionBox.getSelectedItem();
-                JOptionPane.showMessageDialog(newFrame, "You asked: " + selected);
+                JOptionPane.showMessageDialog(gameFrame, "You asked: " + selected);
             });
 
+            // * PUTTING EVERYTHING TOGETHER*/
 
-
-            //* PUTTING EVERYTHING TOGETHER*/
-            
             // main content Panel for character; everything except for question asker
             JPanel mainContentPanel = new JPanel();
             mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.X_AXIS));
@@ -251,14 +279,9 @@ public class GuessWhoGame {
             questionPanel.setPreferredSize(new Dimension(1400, 120));
             questionPanel.setOpaque(false);
 
-
-            // black magic
-            // TODO: make this understandable
-            int dropdownWidth = 400;
-            int dropdownHeight = 40;
-            int dropdownX = (1400 - dropdownWidth) / 2;
-            questionBox.setBounds(dropdownX, 30, dropdownWidth, dropdownHeight);
-            enterButton.setBounds(dropdownX + dropdownWidth + 20, 30, 100, 40);
+            // Use a simple layout to center everything horizontally
+            questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+            questionPanel.add(questionLabel);
             questionPanel.add(questionBox);
             questionPanel.add(enterButton);
 
@@ -268,8 +291,8 @@ public class GuessWhoGame {
             gamePanel.add(questionPanel, BorderLayout.SOUTH);
 
             // Show the frame
-            newFrame.setContentPane(gamePanel);
-            newFrame.setVisible(true);
+            gameFrame.setContentPane(gamePanel);
+            gameFrame.setVisible(true);
         });
 
         // Create the RULES button
@@ -286,8 +309,11 @@ public class GuessWhoGame {
             JFrame rulesFrame = new JFrame("Rules");
             rulesFrame.setResizable(false);
             rulesFrame.setSize(900, 600);
-            rulesFrame.setLocationRelativeTo(frame);
+            rulesFrame.setLocationRelativeTo(startFrame);
             rulesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            // Sets favicon
+            rulesFrame.setIconImage(icon.getImage());
 
             CardLayout cardLayout = new CardLayout();
             JPanel cardPanel = new JPanel(cardLayout);
@@ -295,7 +321,8 @@ public class GuessWhoGame {
             // First rules panel
             JPanel rulesPanel1 = new JPanel() {
                 @Override
-                //! terrance, why are you creating the entire panel in the paintComponent method?
+                // ! terrance, why are you creating the entire panel in the paintComponent
+                // method?
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     g.setColor(new Color(10, 20, 60)); // Navy blue
@@ -390,7 +417,31 @@ public class GuessWhoGame {
         settingsButton.setBorderPainted(false);
         settingsButton.setContentAreaFilled(true);
         settingsButton.addActionListener(e -> {
-            // stuff here
+            JFrame settingsFrame = new JFrame("Settings");
+            settingsFrame.setResizable(false);
+            settingsFrame.setSize(600, 400);
+            settingsFrame.setLocationRelativeTo(startFrame);
+            settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            // Sets favicon
+            settingsFrame.setIconImage(icon.getImage());
+
+            JPanel settingsPanel = new JPanel();
+            settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.Y_AXIS));
+            settingsPanel.setBackground(new Color(10, 20, 60));
+
+            JLabel settingsLabel = new JLabel("Settings");
+            settingsLabel.setFont(new Font("Arial", Font.BOLD, 36));
+            settingsLabel.setForeground(Color.WHITE);
+            settingsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            // Add components to the panel
+            settingsPanel.add(Box.createVerticalStrut(20));
+            settingsPanel.add(settingsLabel);
+            settingsPanel.add(Box.createVerticalStrut(20));
+
+            settingsFrame.add(settingsPanel);
+            settingsFrame.setVisible(true);
         });
 
         JLabel versionText = new JLabel("<html>Created by ByteFang<br>version 12345<br>Terrance sucks</html>");
@@ -432,7 +483,7 @@ public class GuessWhoGame {
         versionPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         mainPanel.add(versionPanel);
 
-        frame.add(mainPanel);
-        frame.setVisible(true);
+        startFrame.add(mainPanel);
+        startFrame.setVisible(true);
     }
 }
