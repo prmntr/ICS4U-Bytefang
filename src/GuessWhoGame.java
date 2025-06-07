@@ -6,6 +6,7 @@ import javax.swing.*;
  * @author brian
  */
 public class GuessWhoGame {
+    // TODO: change frame icon setIconImage()
     public void GuessWho() {
         // Create a frame for the intro and set properties
         JFrame frame = new JFrame("Guess Who");
@@ -121,7 +122,7 @@ public class GuessWhoGame {
 
             // small logic to get player name and set up players
             String playerName = JOptionPane.showInputDialog(newFrame, "Enter your name:");
-            if (playerName == null) {
+            if (playerName == null || playerName.trim().isEmpty()) {
                 playerName = "Player 1";
             }
             System.out.println(playerName); // TODO: remove when done and also fix
@@ -135,7 +136,7 @@ public class GuessWhoGame {
             for (Character character : humanCharacters) {
                 String charName = character.getName();
                 JPanel card = new JPanel(new BorderLayout());
-                card.setMaximumSize(new Dimension(100, 120));
+                card.setMaximumSize(new Dimension(110, 130));
                 card.setBackground(new Color(0, 0, 0, 90));
                 card.setBorder(BorderFactory.createLineBorder(Color.WHITE, 0));
 
@@ -156,12 +157,55 @@ public class GuessWhoGame {
             }
 
             // TODO: replace with generic bot vs human image
-            JLabel botAndHuman = new JLabel();
-            botAndHuman.setHorizontalAlignment(JLabel.CENTER);
-            Image botAndHumanImg = new ImageIcon("src/media/placeholder.jpg").getImage()
-                    .getScaledInstance(385, 200, Image.SCALE_SMOOTH);
-            botAndHuman.setIcon(new ImageIcon(botAndHumanImg));
-            botAndHuman.setAlignmentX(Component.CENTER_ALIGNMENT); // This centers it
+            JPanel botAndHuman = new JPanel();
+            botAndHuman.setLayout(new BoxLayout(botAndHuman, BoxLayout.X_AXIS));
+            botAndHuman.setOpaque(false);
+
+            // Player image and label
+            JPanel playerPanel = new JPanel();
+            playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
+            playerPanel.setOpaque(false);
+
+            JLabel playerImage = new JLabel();
+            Image playerImg = new ImageIcon("src/media/placeholder.jpg").getImage()
+                    .getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+            playerImage.setIcon(new ImageIcon(playerImg));
+            playerImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            JLabel playerLabel = new JLabel(playerName, SwingConstants.CENTER);
+            playerLabel.setForeground(Color.WHITE);
+            playerLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            playerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            playerPanel.add(playerImage);
+            playerPanel.add(Box.createVerticalStrut(8));
+            playerPanel.add(playerLabel);
+
+            // Computer image and label
+            JPanel computerPanel = new JPanel();
+            computerPanel.setLayout(new BoxLayout(computerPanel, BoxLayout.Y_AXIS));
+            computerPanel.setOpaque(false);
+
+            JLabel computerImage = new JLabel();
+            Image computerImg = new ImageIcon("src/media/placeholder.jpg").getImage()
+                    .getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+            computerImage.setIcon(new ImageIcon(computerImg));
+            computerImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            JLabel computerLabel = new JLabel("Computer", SwingConstants.CENTER);
+            computerLabel.setForeground(Color.WHITE);
+            computerLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            computerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            computerPanel.add(computerImage);
+            computerPanel.add(Box.createVerticalStrut(8));
+            computerPanel.add(computerLabel);
+
+            // Add both panels to the main panel with spacing
+            botAndHuman.add(playerPanel);
+            botAndHuman.add(Box.createHorizontalStrut(10));
+            botAndHuman.add(computerPanel);
+            botAndHuman.setAlignmentX(Component.CENTER_ALIGNMENT);
             botAndHuman.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
             // TODO: this is where the real logic starts; start a loop blah
